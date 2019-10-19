@@ -1,0 +1,94 @@
+! Urxvt terminal emulator
+! Configuration
+
+URxvt*disallowedWindowOps: 20,21,SetXprop
+
+URxvt*iso14755: False 
+URxvt*iso14755_52: False
+
+URxvt.termName          :    rxvt-unicode-256color
+URxvt.font              :    xft:Fira Mono:size=11
+URxvt.intensityStyles   :    false
+URxvt.scrollBar         :    false
+URxvt.internalBorder    :    15
+URxvt.perl-ext-common   :    url-select
+!vtwheel
+
+URxvt.keysym.M-u            :    perl:url-select:select_next
+URxvt.url-select.button     :    1
+URxvt.url-select.launcher   :    firefox
+URxvt.url-select.underline  :    true
+
+! Base16 Seti UI
+! Scheme: 
+#define base00 #151718
+#define base01 #282a2b
+#define base02 #3b758c
+#define base03 #41535b
+#define base04 #43a5d5
+#define base05 #d6d6d6
+#define base06 #eeeeee
+#define base07 #ffffff
+#define base08 #cd3f45
+#define base09 #db7b55
+#define base0A #e6cd69
+#define base0B #9fca56
+#define base0C #55dbbe
+#define base0D #55b5db
+#define base0E #a074c4
+#define base0F #8a553f
+
+URxvt*foreground:   base05
+URxvt*background:   base00
+URxvt*cursorColor:  base05
+
+*color0:       base00
+*color1:       base08
+*color2:       base0B
+*color3:       base0A
+*color4:       base0D
+*color5:       base0E
+*color6:       base0C
+*color7:       base05
+
+*color8:       base03
+*color9:       base08
+*color10:      base0B
+*color11:      base0A
+*color12:      base0D
+*color13:      base0E
+*color14:      base0C
+*color15:      base07
+
+! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
+! use 'shell' template to set these if necessary
+!URxvt*color16:      base00
+!URxvt*color17:      base05
+!URxvt*color18:      base01
+!URxvt*color19:      base02
+!URxvt*color20:      base04
+!URxvt*color21:      base06
+
+! Other Applications
+
+polybar.background: base00
+
+Sxiv.foreground: base0C
+Sxiv.background: base00
+
+! Xft
+
+Xft.autohint: 1
+Xft.antialias: 1
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
+
+! Emacs
+
+Emacs.menuBar: off
+Emacs.toolBar: off
+Emacs.verticalScrollBars: off
+Emacs.cursorBlink: off
+Emacs.internalBorder: 10
