@@ -23,7 +23,6 @@ theme.color1        = "#dc322f"
 theme.color9        = "#bc120f"
 theme.color2        = "#859900"
 theme.color10       = "#657900"
---theme.color10       = "#758900"
 theme.color3        = "#b58900"
 theme.color11       = "#a57900"
 theme.color4        = "#268bd2"
@@ -81,8 +80,6 @@ theme.border_marked = theme.blue
 -- mouse_finder_[color|timeout|animate_timeout|radius|factor]
 -- prompt_[fg|bg|fg_cursor|bg_cursor|font]
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
--- Example:
---theme.taglist_bg_focus = "#ff0000"
 
 -- Variables set for theming notifications:
 -- notification_font
@@ -103,9 +100,6 @@ theme.notification_min_width = 400
 theme.menu_submenu_icon = theme_path.."default/submenu.png"
 theme.menu_height = dpi(15)
 theme.menu_width  = dpi(100)
-
--- beautiful.variable in your rc.lua
---theme.bg_widget = "#cc0000"
 
 -- Define the image to load
 theme.titlebar_close_button_normal = theme_path.."default/titlebar/close_normal.png"
@@ -165,4 +159,3 @@ theme.icon_theme = nil
 
 -- Exports
 return theme
-
