@@ -44,6 +44,8 @@ require("behavior.window_mouse")
 
 -- Set visuals
 beautiful.init(themes_path .. theme_name .. "/theme.lua")
+require("theming.wallpaper")
+
 if theme_name == "automata" then
    require("theming.decorations")
    require("theming.bar")
@@ -79,18 +81,6 @@ menubar.utils.terminal = terminal
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
-
-local function set_wallpaper(s)
-   -- Wallpaper
-   if beautiful.wallpaper then
-      local wallpaper = beautiful.wallpaper
-      -- If wallpaper is a function, call it with the screen
-      if type(wallpaper) == "function" then
-         wallpaper = wallpaper(s)
-      end
-      gears.wallpaper.maximized(wallpaper, s, true)
-   end
-end
 
 local tags = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" }
 local tags_per_screen = math.ceil(#tags/screen:count())
@@ -168,8 +158,7 @@ screen.connect_signal(
 
 awful.screen.connect_for_each_screen(
    function(s)
-      -- Set the wallpaper.
-      set_wallpaper(s)
+      -- View tag one
       s.tags[1]:view_only()
    end
 )
