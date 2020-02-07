@@ -19,12 +19,13 @@ local theme_path = gfs.get_configuration_dir() .. "/theme/automata/"
 -- Code
 local theme = {}
 
-theme.color0        = "#002b36"
+theme.color0        = "#151718"
 theme.color8        = "#657b83"
 theme.color1        = "#dc322f"
 theme.color9        = "#bc120f"
 theme.color2        = "#859900"
-theme.color10       = "#758900"
+theme.color10       = "#657900"
+--theme.color10       = "#758900"
 theme.color3        = "#b58900"
 theme.color11       = "#a57900"
 theme.color4        = "#268bd2"
@@ -34,7 +35,7 @@ theme.color13       = "#5c61b4"
 theme.color6        = "#2aa198"
 theme.color14       = "#1b9289"
 theme.color7        = "#93a1a1"
-theme.color15       = "#fdf6e3"
+theme.color15       = "#FFFFFF"
 
 theme.black         = theme.color0
 theme.red           = theme.color1
@@ -55,19 +56,19 @@ theme.white         = theme.color15
 
 theme.font          = "Fira Mono 9"
 
-theme.bg_normal     = theme.white
-theme.bg_focus      = theme.gray
+theme.bg_normal     = theme.black
+theme.bg_focus      = theme.white
 theme.bg_urgent     = theme.red
 theme.bg_minimize   = theme.black
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = theme.gray
-theme.fg_focus      = theme.white
+theme.fg_normal     = theme.white
+theme.fg_focus      = theme.black
 theme.fg_urgent     = theme.fg_normal
 theme.fg_minimize   = theme.fg_normal
 
-theme.useless_gap   = dpi(5)
-theme.border_width  = dpi(5)
+theme.useless_gap   = dpi(0)
+theme.border_width  = dpi(0)
 theme.border_normal = theme.white
 theme.border_focus  = theme.magenta
 theme.border_marked = theme.blue
@@ -92,9 +93,11 @@ theme.notification_fg = "#D6D6D6"
 theme.notification_border_color = "#151718"
 -- notification_[width|height|margin]
 -- notification_[border_color|border_width|shape|opacity]
-theme.notification_max_height = 200
 theme.notification_icon_size = 200
+theme.notification_max_height = 200
 theme.notification_max_width = 400
+theme.notification_min_height = 100
+theme.notification_min_width = 400
 
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]

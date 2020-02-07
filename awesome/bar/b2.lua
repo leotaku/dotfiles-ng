@@ -18,13 +18,27 @@ local dpi = beautiful.xresources.apply_dpi
 -- Code
 local helper = {}
 helper.sep = wibox.widget {
-   markup = "|",
-   widget = wibox.widget.textbox,
+   {
+      layout = wibox.container.margin,
+      left = dpi(1),
+   },
+   {
+      markup = "|",
+      widget = wibox.widget.textbox,
+   },
+   layout = wibox.layout.fixed.horizontal
 }
 helper.empty = wibox.widget {
    layout = wibox.container.margin,
 }
 
+local function read_file(path)
+    local file = io.open(path, "rb") -- r read mode and b binary mode
+    if not file then return nil end
+    local content = file:read "*a" -- *a or *all reads the whole file
+    file:close()
+    return content
+end
 
 local function create_slider(arg)
    local slider = wibox.widget {
@@ -65,6 +79,26 @@ local function create_slider(arg)
    }
 end
 
+local function create_progress(arg)
+   return wibox.widget {
+      {
+         id = "progress",
+         shape = gears.shape.rounded_rect,
+         max_value = arg.maximum,
+         value = arg.value,
+         widget = wibox.widget.progressbar,
+         color = arg.color,
+         background_color = arg.background_color,
+      },
+      top = dpi(7),
+      bottom = dpi(7),
+      layout = wibox.container.margin,
+      set_value = function(self, val)
+        self.progress.value = val
+      end
+   }
+end
+
 local light_slider = create_slider {
    color = beautiful.yellow,
    background_color = beautiful.darkyellow,
@@ -87,48 +121,136 @@ local pulse_slider = create_slider {
    end
 }
 
-local battery_slider = create_slider {
-   color = beautiful.green,
-   background_color = beautiful.darkgreen,
+local battery_slider = create_progress {
+   color = beautiful.darkgreen,
+   background_color = beautiful.green,
    value = 0,
    maximum = 1000,
    minimum = 0,
 }
 
+local calendar = wibox.widget {
+   date = os.date('*t'),
+   widget = wibox.widget.calendar.month,
+}
+
+local calendar_widget = wibox.widget {
+   {
+      calendar,
+      top = dpi(5),
+      bottom = dpi(5),
+      left = dpi(10),
+      right = dpi(10),
+      layout = wibox.container.margin
+   },
+   color = beautiful.white,
+   top = dpi(1),
+   layout = wibox.container.margin
+}
+
+gears.timer {
+    timeout   = 60,
+    call_now  = true,
+    autostart = true,
+    callback  = function()
+       calendar.date = os.date('*t')
+    end
+}
+
+gears.timer {
+    timeout   = 10,
+    call_now  = true,
+    autostart = true,
+    callback  = function()
+       now = tonumber(read_file("/sys/class/power_supply/BAT0/energy_now"))
+       full = tonumber(read_file("/sys/class/power_supply/BAT0/energy_full"))
+
+       battery_slider.value = math.floor(1000 * now/full)
+    end
+}
+
 local function create(s)
-   s.mypromptbox = awful.widget.prompt {
+   local mypromptbox = awful.widget.prompt {
       prompt = 'Execute: '
    }
-   s.mylayoutbox = awful.widget.layoutbox(s)
-   s.mytaglist = awful.widget.taglist {
+   local mylayoutbox = awful.widget.layoutbox(s)
+   local mytaglist = awful.widget.taglist {
       screen = s,
       filter  = awful.widget.taglist.filter.all,
       layout   = {
          spacing = dpi(7),
-         spacing_widget = helper.sep,
+         --spacing_widget = helper.sep,
          layout  = wibox.layout.fixed.horizontal,
       },
    }
    
-   s.top_bar = awful.wibar(
+   local mytextclock = wibox.widget.textclock("%H:%M")
+
+   local cal_popup = awful.popup {
+      ontop = true,
+      visible = false,
+      preferred_positions = top,
+      widget = calendar_widget
+   }
+   awful.placement.top_right(
+      cal_popup,
+      {
+         margins = { top = dpi(22), right = 0},
+         parent = awful.screen.focused()
+      }
+   )
+   mytextclock:connect_signal(
+      "mouse::enter",
+      function ()
+         awful.placement.top_right(
+            cal_popup,
+            {
+               margins = { top = dpi(22), right = 0},
+               parent = awful.screen.focused()
+            }
+         )
+         cal_popup.visible = true
+      end
+   )
+   mytextclock:connect_signal(
+      "mouse::leave",
+      function ()
+         cal_popup.visible = false
+      end
+   )
+
+   local mymail = wibox.widget {
+      awful.widget.watch('notmuch count tag:unread', 5),
+      wibox.widget.textbox('Mail'),
+      spacing = dpi(3),
+      layout = wibox.layout.fixed.horizontal,
+   };
+   -- local mymailmessages = wibox.widget {};
+   -- mymailmessages:attach( mymail, "tr" )
+   
+   local top_bar = awful.wibar(
       {
          position = "top",
          screen = s,
          width = s.geometry.width,
          -- height = dpi(27),
-         bg = beautiful.color15,
+         bg = beautiful.black,
       }
    )
    
-   s.top_bar:setup {
+   top_bar:setup {
       {
          -- Actual bar
          {
             -- Start section
             {
-               s.mytaglist,
                {
-                  s.mypromptbox,
+                  mytaglist,
+                  left = dpi(5),
+                  layout = wibox.container.margin,
+               },
+               {
+                  mypromptbox,
                   layout = wibox.layout.fixed.horizontal,
                },
                layout = wibox.layout.stack,
@@ -151,19 +273,17 @@ local function create(s)
             },
             -- End section
             {
+               mybattery,
                {
-                  widget = wibox.widget.systray
+                  {
+                     widget = wibox.widget.systray
+                  },
+                  top = dpi(3),
+                  bottom = dpi(3),
+                  layout = wibox.container.margin
                },
-               -- s.mylayoutbox,
-               {
-                  format = "%Y-%m-%d",
-                  widget = wibox.widget.textclock
-               },
-               {
-                  format = "%H:%M:%S",
-                  widget = wibox.widget.textclock
-               },
-               helper.empty,
+               mytextclock,
+               mymail,
                spacing = dpi(10),
                spacing_widget = helper.sep,
                layout = wibox.layout.fixed.horizontal,
@@ -171,8 +291,8 @@ local function create(s)
             layout = wibox.layout.align.horizontal,
          },
          layout = wibox.container.margin,
-         bottom = dpi(1),
-         color = beautiful.fg_normal,
+         bottom = dpi(0),
+         color = beautiful.black,
       },
       top = dpi(0),
       layout = wibox.container.margin,

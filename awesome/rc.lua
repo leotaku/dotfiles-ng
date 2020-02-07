@@ -31,6 +31,7 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+local sharedtags = require("sharedtags")
 
 -- Enable default awful configuration
 require("awful.hotkeys_popup.keys")
@@ -45,10 +46,19 @@ require("behavior.window_mouse")
 -- Set visuals
 beautiful.init(themes_path .. theme_name .. "/theme.lua")
 if theme_name == "automata" then
-   require("bar.b2")
    require("decoration.macos")
+   require("bar.b2")
 end
 --require("themes.basics")
+
+-- client.connect_signal(
+--    "manage",
+--    function (c)
+--       c.shape = function(cr,w,h)
+--          gears.shape.rounded_rect(cr,w,h,5)
+--       end
+--    end
+-- )
 
 -- Set variables
 terminal = "urxvtc -e tmux"
@@ -72,20 +82,11 @@ awful.layout.layouts = {
    -- awful.layout.suit.corner.ne,
    -- awful.layout.suit.corner.sw,
    -- awful.layout.suit.corner.se,
-      awful.layout.suit.floating,
+   -- awful.layout.suit.floating,
 }
 
-client.connect_signal(
-   "manage",
-   function (c)
-      c.shape = function(cr,w,h)
-         gears.shape.rounded_rect(cr,w,h,5)
-      end
-   end
-)
-
 -- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
+menubar.utils.terminal = terminal
 
 -- Run new test configurations
 require("testing")
@@ -105,12 +106,85 @@ local function set_wallpaper(s)
    end
 end
 
+local tags = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" }
+local tags_per_screen = math.ceil(#tags/screen:count())
+
+for screen_id=1, screen:count() do
+   local s = screen[screen_id]
+
+   for i=1, tags_per_screen do
+      local i = i + tags_per_screen * (screen_id-1)
+      local tag = tags[i]
+      if tag then
+         awful.tag.add(
+            tag,
+            {
+               screen = s,
+               layout = awful.layout.layouts[1],
+            }
+         )
+      end
+   end
+end
+
+local modkey = "Mod4"
+globalkeys = keys.globalkeys
+
+-- Bind all key numbers to tags.
+-- Be careful: we use keycodes to make it work on any keyboard layout.
+-- This should map on the top row of your keyboard, usually 1 to 9.
+
+local function get_screen_and_tag(i)
+   local s = math.ceil(i / tags_per_screen)
+   local t = math.ceil(i % tags_per_screen)
+   if t == 0 then
+      t = tags_per_screen
+   end
+
+   local screen = screen[s]
+   local tag = screen.tags[t]
+
+   return screen, tag
+end
+
+for i = 1, 10 do
+   globalkeys = gears.table.join(
+      globalkeys,
+      -- View tag only.
+      awful.key({ modkey }, "#" .. i + 9,
+         function ()
+            local tag = awful.screen.focused().tags[i]
+            if tag then
+               tag:view_only()
+            end
+         end,
+         {description = "view tag #"..i, group = "tag"}),
+      -- Move client to tag.
+      awful.key({ modkey, "Shift" }, "#" .. i + 9,
+         function ()
+            if client.focus then
+               local s, tag = get_screen_and_tag(i)
+               if tag then
+                  client.focus:move_to_tag(tag)
+               end
+            end
+         end,
+         {description = "move focused client to tag #"..i, group = "tag"})
+   )
+end
+
+screen.connect_signal(
+   "list",
+   function()
+      awesome.restart()
+   end
+)
+
 awful.screen.connect_for_each_screen(
    function(s)
       -- Set the wallpaper.
       set_wallpaper(s)
-      -- Each screen has its own tag table.
-      awful.tag({ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" }, s, awful.layout.layouts[1])
+      s.tags[1]:view_only()
    end
 )
 
@@ -134,7 +208,7 @@ awful.rules.rules = gears.table.join(
 );
 
 -- Set keys
-root.keys(keys.globalkeys)
+root.keys(globalkeys)
 
 -- Signal function to execute when a new client appears.
 client.connect_signal(

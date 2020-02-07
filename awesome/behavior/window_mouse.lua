@@ -1,18 +1,21 @@
--- window_mouse.lua [_] <&,,)~
+-- window_mouse.lua [_] <;,)~
 
 -- Imports
+local gears = require("gears")
 
 -- Code
 local function move_mouse(c)
    gears.timer.delayed_call(
       function ()
-         mouse.coords (
-            {
-               x = c.x + c.width *(c.rel_x or 0.5),
-               y = c.y + c.height*(c.rel_y or 0.5),
-            },
-            true
-         )
+         if c.valid then
+            mouse.coords (
+               {
+                  x = c.x + c.width *(c.rel_x or 0.5),
+                  y = c.y + c.height*(c.rel_y or 0.5),
+               },
+               true
+            )
+         end
       end
    )
 end
@@ -45,3 +48,10 @@ client.connect_signal(
    end
 )
 
+client.connect_signal(
+   "property::floating",
+   function(c)
+      set_mouse(c)
+      move_mouse(c)
+   end
+)
