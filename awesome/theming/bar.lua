@@ -175,7 +175,7 @@ local function create(s)
          layout  = wibox.layout.fixed.horizontal,
       },
    }
-   
+
    local mytextclock = wibox.widget.textclock("%H:%M")
 
    local cal_popup = awful.popup {
@@ -184,6 +184,7 @@ local function create(s)
       preferred_positions = top,
       widget = calendar_widget
    }
+
    awful.placement.top_right(
       cal_popup,
       {
@@ -191,6 +192,7 @@ local function create(s)
          parent = awful.screen.focused()
       }
    )
+
    mytextclock:connect_signal(
       "mouse::enter",
       function ()
@@ -204,6 +206,7 @@ local function create(s)
          cal_popup.visible = true
       end
    )
+
    mytextclock:connect_signal(
       "mouse::leave",
       function ()
@@ -217,9 +220,7 @@ local function create(s)
       spacing = dpi(3),
       layout = wibox.layout.fixed.horizontal,
    };
-   -- local mymailmessages = wibox.widget {};
-   -- mymailmessages:attach( mymail, "tr" )
-   
+
    local top_bar = awful.wibar(
       {
          position = "top",
@@ -229,7 +230,7 @@ local function create(s)
          bg = beautiful.black,
       }
    )
-   
+
    top_bar:setup {
       {
          -- Actual bar
