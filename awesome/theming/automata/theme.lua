@@ -12,7 +12,7 @@ local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 
 local gfs = require("gears.filesystem")
-local theme_path = gfs.get_configuration_dir() .. "/theme/automata/"
+local theme_path = gfs.get_configuration_dir() .. "/theming/automata/"
 
 -- Code
 local theme = {}
