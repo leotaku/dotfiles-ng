@@ -1,44 +1,36 @@
---  __         ___      ___                        
--- /\ \      /'___`\   /\_ \                       
--- \ \ \____/\_\ /\ \  \//\ \    __  __     __     
---  \ \ '__`\/_/// /__   \ \ \  /\ \/\ \  /'__`\   
---   \ \ \L\ \ // /_\ \__ \_\ \_\ \ \_\ \/\ \L\.\_ 
---    \ \_,__//\______/\_\/\____\\ \____/\ \__/.\_\
---     \/___/ \/_____/\/_/\/____/ \/___/  \/__/\/_/
---
+--    _____________,-.___     _
+--   |____        { {]_]_]   [_]
+--   |___ `-----.__\ \_]_]_    . `
+--   |   `-----.____} }]_]_]_   ,
+--   |_____________/ {_]_]_]_] , `
+-- bar.lua         `-'
+
+-- Art by Hayley Jane Wakenshaw
 
 -- Imports
 local awful = require("awful")
 local beautiful = require("beautiful")
 local wibox = require("wibox")
+local utils = require("lib.utils")
 
 -- Local
 local dpi = beautiful.xresources.apply_dpi
+local read_file = utils.read_file
 
 -- Code
-local helper = {}
-helper.sep = wibox.widget {
-   {
-      layout = wibox.container.margin,
-      left = dpi(1),
-   },
-   {
-      markup = "|",
-      widget = wibox.widget.textbox,
-   },
-   layout = wibox.layout.fixed.horizontal
+local helper = {
+   sep = wibox.widget {
+      {
+         layout = wibox.container.margin,
+         left = dpi(1),
+      },
+      {
+         markup = "|",
+         widget = wibox.widget.textbox,
+      },
+      layout = wibox.layout.fixed.horizontal
+   }
 }
-helper.empty = wibox.widget {
-   layout = wibox.container.margin,
-}
-
-local function read_file(path)
-    local file = io.open(path, "rb") -- r read mode and b binary mode
-    if not file then return nil end
-    local content = file:read "*a" -- *a or *all reads the whole file
-    file:close()
-    return content
-end
 
 local function create_slider(arg)
    local slider = wibox.widget {
