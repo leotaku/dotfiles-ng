@@ -13,7 +13,7 @@
 
 -- Setup
 config_path = os.getenv("HOME") .. "/.config/awesome/"
-themes_path = config_path .. "theme/"
+themes_path = config_path .. "theming/"
 require("lib.errors")
 
 -- Themes
@@ -31,7 +31,6 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
-local sharedtags = require("sharedtags")
 
 -- Enable default awful configuration
 require("awful.hotkeys_popup.keys")
@@ -46,19 +45,9 @@ require("behavior.window_mouse")
 -- Set visuals
 beautiful.init(themes_path .. theme_name .. "/theme.lua")
 if theme_name == "automata" then
-   require("decoration.macos")
-   require("bar.b2")
+   require("theming.decorations")
+   require("theming.bar")
 end
---require("themes.basics")
-
--- client.connect_signal(
---    "manage",
---    function (c)
---       c.shape = function(cr,w,h)
---          gears.shape.rounded_rect(cr,w,h,5)
---       end
---    end
--- )
 
 -- Set variables
 terminal = "urxvtc -e tmux"
@@ -87,9 +76,6 @@ awful.layout.layouts = {
 
 -- Menubar configuration
 menubar.utils.terminal = terminal
-
--- Run new test configurations
-require("testing")
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
