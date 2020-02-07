@@ -191,7 +191,7 @@ awful.rules.rules = gears.table.join(
          }
       }
    }
-);
+)
 
 -- Set keys
 root.keys(globalkeys)
