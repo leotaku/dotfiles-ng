@@ -66,7 +66,7 @@ local function key(keyseq, press, ...)
 end
 
 local function bindkeys(keytable, ...)
-   for _,tbl in pairs({...}) do
+   for _, tbl in pairs({...}) do
       keytable = gears.table.join(
          keytable,
          key(unpack(tbl))
