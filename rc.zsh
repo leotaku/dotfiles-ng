@@ -315,9 +315,9 @@ function fuzzy-locate {
 # selection with fzf
 function zlua-or-fzf {
     if [[ -n "$@" ]]; then
-        dir="$(_zlua -e ${@})"
+        local dir="$(_zlua -e ${@})"
         if [[ -z "$dir" ]]; then
-            dir="$(fuzzy-locate \"$@\" | fzf)"
+            dir="$(fuzzy-locate | fzf)"
         fi
         cd "$dir"
         _zlua --add "$(pwd)" &|
