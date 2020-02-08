@@ -330,7 +330,7 @@ function zlua-or-fzf {
 
 # lf
 lf () {
-    tmp="$(mktemp)"
+    local tmp="$(mktemp)"
     export INITIALDIR="$PWD"
     command lf "$@"
 
