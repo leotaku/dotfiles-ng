@@ -169,7 +169,7 @@ bindkey '^[[3;5~' do-nothing
 # word deletion
 bindkey '^H' backward-kill-word
 autoload -Uz select-word-style
-WORDCHARS='*?_-~=&;!#$%^'
+WORDCHARS='*?_-~=&;!#$%^:'
 select-word-style normal
 
 # application preferences
