@@ -349,7 +349,7 @@ lf () {
         rm $HOME/.lfnodir
     else
         if [ -f "$tmp" ]; then
-            dir="$(cat "$tmp")"
+            local dir="$(cat "$tmp")"
             rm -f "$tmp"
             if [ -d "$dir" ]; then
                 if [ "$dir" != "$PWD" ]; then
