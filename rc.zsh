@@ -310,19 +310,6 @@ function zlua-or-fzf {
     fi
 }
 
-# FIXME: direnv
-
-# eval "$(direnv hook zsh)"
-# _direnv_hook() {
-#     direnv export zsh > $HOME/.direnv_cmd
-#     . $HOME/.direnv_cmd    
-# }
-
-# autoload -Uz add-zle-hook-widget
-# zle -N direnv-line-init _direnv_hook
-# add-zle-hook-widget line-init direnv-line-init
-# add-zsh-hook precmd _direnv_hook
-
 # lf
 lf () {
     local tmp="$(mktemp)"
@@ -344,7 +331,17 @@ lf () {
     fi
 }
 
-# currently testing
+# direnv
+function _direnv_hook {
+    eval "$(command direnv export zsh)"
+}
+function direnv {
+    command direnv $@
+    _direnv_hook
+}
+add-zsh-hook chpwd _direnv_hook
+
+# experimental
 
 function nm {
     if [[ -z "$@" ]]; then
