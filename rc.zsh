@@ -122,6 +122,7 @@ typeset -gA K=(
   'F11'       "$terminfo[kf11]"
   'F12'       "$terminfo[kf12]"
   'Insert'    "$terminfo[kich1]"
+  'Delete'    "$terminfo[kdch1]"
   'Home'      "$terminfo[khome]"
   'PageUp'    "$terminfo[kpp]"
   'End'       "$terminfo[kend]"
