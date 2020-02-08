@@ -174,49 +174,39 @@ if [ -z $__LOCAL_PATH_SOURCED ]; then
 fi
 
 # aliases
-alias urxvtx="urxvtc -e $HOME/.scripts/spawn-tmux.sh"
-alias open="rifle"
-alias show="lazy sxiv /dev/stdin"
-
 alias ll="exa -l"
-#alias canto="canto-curses"
-#alias aria="aria2c"
+alias show="lazy sxiv /dev/stdin"
 alias transmission="transmission-remote-gtk"
 alias transmission-cli="transmission-remote-cli"
-#alias zathura="silent zathura"
-
-alias EXIT="tmux kill-session"
-alias QUIT="exit"
-alias DETACH="tmux detach-client"
 
 # config-aliases
 alias diff="diff --color=auto"
 
-# helpers
-function swap() {
+# helper functions
+function swap {
     [[ -z "$1" ]] || [[ -z "$2" ]] && exit 1
     mv "$1" ".tmp.$1" || exit 1
     mv "$2" "$1" || exit 1
     mv ".tmp.$1" "$2"
 }
 
-function lazy() {
+function lazy {
     tmpfile="$(mktemp)"
     sponge > "$tmpfile"
     eval "${@} < $tmpfile"
     rm "$tmpfile"
 }
 
-function silent() {
+function silent {
     $@ &>/dev/null &|
 }
 
-function launch() {
+function launch {
     silent "${@}"
     exit
 }
 
-function noti () {
+function noti {
     cmd="${@}"
     out="$(eval ${cmd} &>/dev/stderr)"
     
@@ -227,39 +217,23 @@ function noti () {
     fi
 }
 
-# 7s
-function 7s {
-    local file="$1"
-    local archive_dir="${file%.*}"
-
-    mkdir "$archive_dir" || return 1
-    mv "$file" "$archive_dir" || {
-        rm "$archive_dir" -r
-        return 1
-    }
-    
-    (cd "$archive_dir"
-     7z x -bso0 "$file" || return 1
-    ) || return 1
-}
-
 # kitty
 function icat {
    kitty +kitten icat --align left $@
 }
 
 # emacs
-function emacsd() {
+function emacsd {
     emacs --daemon ${@}
 }
-function et() {
+function et {
     emacsclient -t ${@} --alternate-editor=""
 }
-function ea() {
+function ea {
     emacsclient -e nil --alternate-editor="" &&\
     silent emacsclient -c ${@}
 }
-function ec() {
+function ec {
     if xdo id -d -N Emacs; then
         if [[ -n "${@}" ]]; then
             emacsclient -n ${@}
@@ -271,6 +245,7 @@ function ec() {
     fi
 }
 alias ek="emacsclient -e '(kill-emacs)'"
+alias eks="emacsclient -e '(save-buffers-kill-emacs)'"
 
 # easydirs
 setopt auto_pushd
