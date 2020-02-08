@@ -59,7 +59,8 @@ bindkey "$K[Down]" history-substring-search-down'
 zplugin light zsh-users/zsh-history-substring-search
 
 zplugin ice wait'0' lucid atload'
-bindkey "^H" backward-kill-word'
+bindkey "^H" backward-kill-word
+AUTOPAIR_BKSPC_WIDGET=backward-delete-char'
 zplugin light hlissner/zsh-autopair
 zplugin ice wait'0' lucid atload'
 fast-theme $HOME/.config/zsh-sensible-theme.ini -q'
