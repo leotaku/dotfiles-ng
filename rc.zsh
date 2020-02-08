@@ -33,10 +33,12 @@ zle -N edit-command-line
 
 # zplugin setup
 declare -A ZPLGM
-ZPLGM[BIN_DIR]="$(zplugin-install)"
-# FIXME: does not work
-ZPLGM[CACHE_DIR]="${XDG_CACHE_HOME:-$HOME/.cache/zplugin}"
-ZPLGM[ZCOMPDUMP_PATH]="$ZPLGM[CACHE_DIR]/zcompdump"
+ZPLGM[HOME_DIR]="$HOME/.zplugin"
+ZPLGM[BIN_DIR]="$ZPLGM[HOME_DIR]/bin"
+ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache/zplugin}"
+ZPLGM[ZCOMPDUMP_PATH]="$ZSH_CACHE_DIR/zcompdump"
+mkdir -p "$ZPLGM[HOME_DIR]"
+ln -sfn "$(zplugin-install)" "$ZPLGM[BIN_DIR]"
 
 # zplugin module
 module_path+=( "$ZPLGM[BIN_DIR]/zmodules/Src" )
@@ -63,10 +65,10 @@ zplugin ice wait'0' lucid atload'
 fast-theme $HOME/.config/zsh-sensible-theme.ini -q'
 zplugin light zdharma/fast-syntax-highlighting
 
-zplugin ice wait'0' atinit'' lucid atload'
+zplugin ice wait'0' atinit'zpcompinit' lucid atload'
 ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_AUTOSUGGEST_MANUAL_REBIND=true
-add-zsh-hook -d precmd _zsh_autosuggest_start
+#add-zsh-hook -d precmd _zsh_autosuggest_start
 _zsh_autosuggest_start'
 zplugin light zsh-users/zsh-autosuggestions
 
@@ -91,11 +93,8 @@ zplugin snippet "$ZPLGM[BIN_DIR]/_zplugin"
 
 PS1=""; RPS1=""
 local starting_dir="$PWD"
-zplugin ice pick'library/elf_load.zsh' multisrc'elves/me.zsh allies/dwarf.zsh allies/rogue.zsh' atload'rogue_setup; dwarf_setup; elf_setup;' lucid
+zplugin ice pick'library/elf_load.zsh' multisrc'elves/me.zsh allies/dwarf.zsh allies/rogue.zsh' atload'dwarf_setup; rogue_setup; elf_setup;' lucid
 zplugin load leotaku/village
-
-# compinit
-zpcompinit
 
 # completion
 zstyle ':compinstall' filename '~/.zshrc'
