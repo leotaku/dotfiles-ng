@@ -191,9 +191,12 @@ client.connect_signal(
    function (c)
       -- Set the windows at the slave,
       -- i.e. put it at the end of others instead of setting it master.
-      -- if not awesome.startup then awful.client.setslave(c) end
       if not awesome.startup then
          awful.client.setslave(c)
+         if c.floating then
+            local f = awful.placement.scale + awful.placement.centered
+            f(c, {to_percent = 0.75})
+         end
       end
 
       if awesome.startup
