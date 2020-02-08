@@ -376,13 +376,13 @@ function zsudo {
 }
 
 function nix-shell {
-    command nix-shell --run "zsh || bash" $@
+    command nix-shell --run "exec zsh" $@
 }
 
 function nix {
     if [[ "$1" == "run" ]] && ! [[ ${@[(ie)-c]} -le ${#@} ]]; then
         shift
-        command nix run $@ -c zsh
+        command nix run $@ -c exec zsh
     else
         command nix $@
     fi
