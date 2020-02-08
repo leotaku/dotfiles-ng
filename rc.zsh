@@ -149,9 +149,23 @@ bindkey -M vicmd "$K[F7]" vi-insert
 bindkey "^[" vi-cmd-mode
 bindkey -M vicmd "^[" vi-insert
 
+# empty widget
+function do_nothing {
+    :
+}
+zle -N do-nothing do_nothing
+
 # other keybindings
 bindkey '^ ' edit-command-line
 bindkey '^G' history-incremental-pattern-search-backward
+bindkey '^[[1;5C' emacs-forward-word
+bindkey '^[[1;5D' emacs-backward-word
+bindkey "$K[Delete]" delete-char
+bindkey "$K[Insert]" do-nothing
+bindkey '^[[1;5F' do-nothing
+bindkey '^[[1;5H' do-nothing
+bindkey '^[[2;5~' do-nothing
+bindkey '^[[3;5~' do-nothing
 
 # word deletion
 bindkey '^H' backward-kill-word
