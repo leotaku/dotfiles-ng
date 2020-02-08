@@ -388,21 +388,5 @@ function nix {
     fi
 }
 
-function nixify {
-    if ! [[ -e shell.nix ]]; then
-        cat > shell.nix <<EOF
-with import <nixpkgs> {};
-stdenv.mkDerivation {
-  name = "env";
-  buildInputs = [
-    $1
-  ];
-}
-EOF
-    else
-        return 1
-    fi
-}
-
 # profile startup
 # zprof | head
