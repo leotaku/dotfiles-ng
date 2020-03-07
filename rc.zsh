@@ -83,30 +83,30 @@ HISTORY_SUBSTRING_SEARCH_FUZZY=true
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=true
 bindkey "$K[Up]" history-substring-search-up
 bindkey "$K[Down]" history-substring-search-down'
-zinit light zsh-users/zsh-history-substring-search
+zinit load zsh-users/zsh-history-substring-search
 
 zinit ice lucid atload'
 bindkey "^H" backward-kill-word
 AUTOPAIR_BKSPC_WIDGET=backward-delete-char'
-zinit light hlissner/zsh-autopair
+zinit load hlissner/zsh-autopair
 
 zinit ice wait'0' lucid atload'
 fast-theme $HOME/.config/zsh-sensible-theme.ini -q'
-zinit light zdharma/fast-syntax-highlighting
+zinit load zdharma/fast-syntax-highlighting
 
 zinit ice wait'0' atinit'zpcompinit' lucid atload'
 ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_AUTOSUGGEST_MANUAL_REBIND=true
 #add-zsh-hook -d precmd _zsh_autosuggest_start
 _zsh_autosuggest_start'
-zinit light zsh-users/zsh-autosuggestions
+zinit load zsh-users/zsh-autosuggestions
+zinit load zsh-users/zsh-completions
 
-zinit ice wait'0' has'z' silent pick'/dev/null' atload'
+zinit ice wait'0' has'z' lucid pick'/dev/null' atload'
 export _ZL_ADD_ONCE=1
 export _ZL_MATCH_MODE=1
 eval "$(z --init zsh fzf)"'
-zinit light skywind3000/z.lua
-zinit light zsh-users/zsh-completions
+zinit load skywind3000/z.lua
 
 zinit ice wait'0' has'direnv' lucid pick'/dev/null' atload'
 function _direnv_hook {
