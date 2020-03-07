@@ -13,6 +13,7 @@ awful.rules.rules = gears.table.join(
          rule_any = {
             name = {
                "Event Tester",  -- xev.
+               "Color picker"
             },
          },
 
