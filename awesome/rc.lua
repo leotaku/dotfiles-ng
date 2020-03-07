@@ -1,19 +1,19 @@
---    ,---.            ,-.-.     ,----.    ,-,--.    _,.---._           ___      ,----.  
---  .--.'  \  ,-..-.-./  \==\ ,-.--` , \ ,-.'-  _\ ,-.' , -  `.  .-._ .'=.'\  ,-.--` , \ 
---  \==\-/\ \ |, \=/\=|- |==||==|-  _.-`/==/_ ,_.'/==/_,  ,  - \/==/ \|==|  ||==|-  _.-` 
---  /==/-|_\ ||- |/ |/ , /==/|==|   `.-.\==\  \  |==|   .=.     |==|,|  / - ||==|   `.-. 
---  \==\,   - \\, ,     _|==/==/_ ,    / \==\ -\ |==|_ : ;=:  - |==|  \/  , /==/_ ,    / 
---  /==/ -   ,|| -  -  , |==|==|    .-'  _\==\ ,\|==| , '='     |==|- ,   _ |==|    .-'  
--- /==/-  /\ - \\  ,  - /==/|==|_  ,`-._/==/\/ _ |\==\ -    ,_ /|==| _ /\   |==|_  ,`-._ 
--- \==\ _.\=\.-'|-  /\ /==/ /==/ ,     /\==\ - , / '.='. -   .' /==/  / / , /==/ ,     / 
+--    ,---.            ,-.-.     ,----.    ,-,--.    _,.---._           ___      ,----.
+--  .--.'  \  ,-..-.-./  \==\ ,-.--` , \ ,-.'-  _\ ,-.' , -  `.  .-._ .'=.'\  ,-.--` , \
+--  \==\-/\ \ |, \=/\=|- |==||==|-  _.-`/==/_ ,_.'/==/_,  ,  - \/==/ \|==|  ||==|-  _.-`
+--  /==/-|_\ ||- |/ |/ , /==/|==|   `.-.\==\  \  |==|   .=.     |==|,|  / - ||==|   `.-.
+--  \==\,   - \\, ,     _|==/==/_ ,    / \==\ -\ |==|_ : ;=:  - |==|  \/  , /==/_ ,    /
+--  /==/ -   ,|| -  -  , |==|==|    .-'  _\==\ ,\|==| , '='     |==|- ,   _ |==|    .-'
+-- /==/-  /\ - \\  ,  - /==/|==|_  ,`-._/==/\/ _ |\==\ -    ,_ /|==| _ /\   |==|_  ,`-._
+-- \==\ _.\=\.-'|-  /\ /==/ /==/ ,     /\==\ - , / '.='. -   .' /==/  / / , /==/ ,     /
 --  `--`        `--`  `--`  `--`-----``  `--`---'    `--`--''   `--`./  `--``--`-----``
 
 -- My AwesomeWM configuration
 -- Large parts have been stolen from Elenapan, thanks
 
 -- Setup
-config_path = os.getenv("HOME") .. "/.config/awesome/"
-themes_path = config_path .. "theming/"
+local config_path = os.getenv("HOME") .. "/.config/awesome/"
+local themes_path = config_path .. "theming/"
 require("lib.errors")
 
 -- Themes
@@ -32,12 +32,23 @@ local beautiful = require("beautiful")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
+-- Local functions
+local dpi = beautiful.xresources.apply_dpi
+
+-- Global variables
+_G.terminal = "urxvtc -e tmux"
+_G.editor = os.getenv("EDITOR") or "nano"
+_G.editor_cmd = terminal .. " -e " .. editor
+
 -- Enable default awful configuration
 require("awful.hotkeys_popup.keys")
 require("awful.autofocus")
 
--- Load behaviors
+-- Load keys
 local keys = require("keys")
+local globalkeys = keys.globalkeys
+
+-- Load behaviors
 require("behavior.rules")
 require("behavior.sloppy_focus")
 require("behavior.window_mouse")
@@ -46,15 +57,13 @@ require("behavior.window_mouse")
 beautiful.init(themes_path .. theme_name .. "/theme.lua")
 require("theming.wallpaper")
 
+-- Widgets
+require("widget.org_agenda")
+
 if theme_name == "automata" then
    require("theming.decorations")
    require("theming.bar")
 end
-
--- Set variables
-terminal = "urxvtc -e tmux"
-editor = os.getenv("EDITOR") or "nano"
-editor_cmd = terminal .. " -e " .. editor
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -79,89 +88,88 @@ awful.layout.layouts = {
 -- Menubar configuration
 menubar.utils.terminal = terminal
 
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+local names = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" }
+local tags = {}
 
-local tags = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" }
-local tags_per_screen = math.ceil(#tags/screen:count())
-
-for screen_id=1, screen:count() do
-   local s = screen[screen_id]
-
-   for i=1, tags_per_screen do
-      local i = i + tags_per_screen * (screen_id-1)
-      local tag = tags[i]
-      if tag then
-         awful.tag.add(
-            tag,
-            {
-               screen = s,
-               layout = awful.layout.layouts[1],
-            }
-         )
-      end
+function mod0(m, i)
+   local n = i % m
+   if n == 0 then
+      return m
+   else
+      return n
    end
 end
 
-local modkey = "Mod4"
-globalkeys = keys.globalkeys
-
--- Bind all key numbers to tags.
--- Be careful: we use keycodes to make it work on any keyboard layout.
--- This should map on the top row of your keyboard, usually 1 to 9.
-
-local function get_screen_and_tag(i)
-   local s = math.ceil(i / tags_per_screen)
-   local t = math.ceil(i % tags_per_screen)
-   if t == 0 then
-      t = tags_per_screen
-   end
-
-   local screen = screen[s]
-   local tag = screen.tags[t]
-
-   return screen, tag
+function screen_for(i)
+   local id = mod0(#screen, i)
+   return screen[id]
 end
 
-for i = 1, 10 do
+for i, name in ipairs(names) do
+   local tag = awful.tag.add(
+      name,
+      {
+         screen = screen[1],
+         layout = awful.layout.layouts[1],
+      }
+   )
+
+   table.insert(tags, tag)
+
    globalkeys = gears.table.join(
       globalkeys,
       -- View tag only.
       awful.key({ modkey }, "#" .. i + 9,
          function ()
-            local tag = awful.screen.focused().tags[i]
-            if tag then
-               tag:view_only()
-            end
+            -- awful.screen.focus(tag.screen)
+            tag:view_only()
          end,
-         {description = "view tag #"..i, group = "tag"}),
+         { description = "view tag #"..i, group = "tag" }
+      ),
       -- Move client to tag.
-      awful.key({ modkey, "Shift" }, "#" .. i + 9,
+      awful.key(
+         { modkey, "Shift" }, "#" .. i + 9,
          function ()
             if client.focus then
-               local s, tag = get_screen_and_tag(i)
-               if tag then
-                  client.focus:move_to_tag(tag)
-               end
+               client.focus:move_to_tag(tag)
             end
          end,
-         {description = "move focused client to tag #"..i, group = "tag"})
+         { description = "move focused client to tag #"..i, group = "tag" }
+      )
    )
+
 end
 
-screen.connect_signal(
-   "list",
-   function()
-      awesome.restart()
-   end
-)
+tag.connect_signal(
+   "request::screen",
+   function(t)
+      for s in screen do
+         if s ~= t.screen and
+            s.geometry.x == t.screen.geometry.x and
+            s.geometry.y == t.screen.geometry.y and
+            s.geometry.width == t.screen.geometry.width and
+         s.geometry.height == t.screen.geometry.height then
+            local t2 = awful.tag.find_by_name(s, t.name)
+            if t2 then
+               t:swap(t2)
+            else
+               t.screen = s
+            end
+            return
+         end
+      end
+end)
 
 awful.screen.connect_for_each_screen(
    function(s)
       -- View tag one
-      s.tags[1]:view_only()
+      local tag = s.tags[1]
+      if tag then
+         tag:view_only()
+      end
    end
 )
+
 
 awful.rules.rules = gears.table.join(
    awful.rules.rules,
@@ -194,8 +202,9 @@ client.connect_signal(
       if not awesome.startup then
          awful.client.setslave(c)
          if c.floating then
-            local f = awful.placement.scale + awful.placement.centered
-            f(c, {to_percent = 0.75})
+            -- local f = awful.placement.scale + awful.placement.centered
+            -- f(c, {to_percent = 0.25})
+            awful.placement.centered(f)
          end
       end
 

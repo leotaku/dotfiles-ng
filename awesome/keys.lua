@@ -4,38 +4,12 @@
 -- |/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
 
 -- Imports
-relief = require("lib.relief")
-
--- Code
+local relief = require("lib.relief")
+local utils = require("lib.utils")
+local cmd = utils.cmd
 
 -- Setup
-modkey = "Mod4"
-
--- Helpers
-local helpers = {}
-function helpers.toggle_fullscreen(c)
-   c.fullscreen = not c.fullscreen
-   c:raise()
-end
-
-function helpers.toggle_max(c)
-   c.maximized = not c.maximized
-   c:raise()
-end
-
-function helpers.toggle_float(c)
-   c.floating = not c.floating
-   c:raise()
-end
-
-function helpers.prompt()
-   awful.screen.focused().mypromptbox:run()
-end
-
-function helpers.inc_layout(i)
-   local s = awful.screen.focused()
-   awful.layout.inc(i, s)
-end
+_G.modkey = "Mod4"
 
 -- Key bindings
 local globalkeys = relief.keys.bindkeys(
@@ -44,7 +18,6 @@ local globalkeys = relief.keys.bindkeys(
    {"M-space", awful.screen.focus_relative, 1},
    {"M-Tab", awful.client.focus.byidx, 1},
    -- Layout
-   --{"M-space", helpers.inc_layout, 1},
    -- Directional focus
    {"M-h", awful.client.focus.bydirection, "left"},
    {"M-j", awful.client.focus.bydirection, "down"},
@@ -57,7 +30,7 @@ local globalkeys = relief.keys.bindkeys(
    {"M-Right", awful.client.swap.bydirection, "right"},
    -- Spawn apps
    -- TODO: put environment variables in separate file
-   {"M-Return", awful.spawn, "urxvtc -e tmux"},
+   {"M-Return", awful.spawn, _G.terminal or "xterm"},
    {"M-d", awful.spawn, "rofi -show drun"},
    -- AwesomeWM
    {"F9", awesome.restart}
@@ -66,9 +39,10 @@ local globalkeys = relief.keys.bindkeys(
 local clientkeys = relief.keys.bindkeys(
    {},
    {"M-x", relief.method2curry("kill"), "self"},
-   {"M-f", helpers.toggle_max, "self"},
-   {"M-m", helpers.toggle_float, "self"}
-   -- {"M-f", helpers.toggle_fullscreen, "self"},
+   {"M-f", cmd.toggle_max, "self"},
+   {"M-m", cmd.toggle_float, "self"},
+   {"M-s", awful.placement.centered, "self"},
+   {"M-q", cmd.toggle_fullscreen, "self"}
 )
 
 local clientbuttons = gears.table.join(

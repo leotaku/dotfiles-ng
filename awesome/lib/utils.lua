@@ -10,17 +10,35 @@ local function read_file(path)
     return content
 end
 
-local function rrect (radius)
-   return function(cr, width, height)
-      gears.shape.rounded_rect(cr, width, height, radius)
-      --gears.shape.octogon(cr, width, height, radius)
-      --gears.shape.rounded_bar(cr, width, height)
-   end
+local cmd = {}
+
+function cmd.toggle_fullscreen(c)
+   c.fullscreen = not c.fullscreen
+   c:raise()
+end
+
+function cmd.toggle_max(c)
+   c.maximized = not c.maximized
+   c:raise()
+end
+
+function cmd.toggle_float(c)
+   c.floating = not c.floating
+   c:raise()
+end
+
+function cmd.prompt()
+   awful.screen.focused().mypromptbox:run()
+end
+
+function cmd.inc_layout(i)
+   local s = awful.screen.focused()
+   awful.layout.inc(i, s)
 end
 
 -- Exports
 local exports = {
-   rrect = rrect,
+   cmd = cmd,
    read_file = read_file,
 }
 

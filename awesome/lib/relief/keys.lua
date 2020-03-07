@@ -13,7 +13,7 @@ awful = require("awful")
 -- Code
 local function translate_key(key)
    if     key == "M" then
-      return _G.modkey
+      return _G.modkey or "Mod4"
    elseif key == "M1" then
       return "Mod1"
    elseif key == "M2" then
