@@ -1,8 +1,8 @@
 #    ____  _____/ /_  __________
 #   /_  / / ___/ __ \/ ___/ ___/
-#  _ / /_(__  ) / / / /  / /__  
-# (_)___/____/_/ /_/_/   \___/  
-# 
+#  _ / /_(__  ) / / / /  / /__
+# (_)___/____/_/ /_/_/   \___/
+#
 # simple zsh config with cool prompt
 
 # profiler
@@ -75,7 +75,7 @@ ln -sfn "$(zplugin-install)" "$ZINIT[BIN_DIR]"
 module_path+=( "$ZINIT[BIN_DIR]/zmodules/Src" )
 zmodload zdharma/zplugin
 
-# zinit
+# zinit setup
 source "$ZINIT[BIN_DIR]/zinit.zsh"
 
 zinit ice wait'0' lucid atload'
@@ -223,7 +223,7 @@ function launch {
 function noti {
     cmd="${@}"
     out="$(eval ${cmd} &>/dev/stderr)"
-    
+
     if [[ $? == 0 ]]; then
         notify-send "${cmd}" "Done!"
     else
