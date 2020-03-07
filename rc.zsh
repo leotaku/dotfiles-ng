@@ -108,6 +108,17 @@ eval "$(z --init zsh fzf)"'
 zinit light skywind3000/z.lua
 zinit light zsh-users/zsh-completions
 
+zinit ice wait'0' has'direnv' lucid pick'/dev/null' atload'
+function _direnv_hook {
+    eval "$(command direnv export zsh)"
+}
+function direnv {
+    command direnv $@
+    _direnv_hook
+}
+add-zsh-hook chpwd _direnv_hook'
+zinit load direnv/direnv
+
 zinit snippet OMZ::plugins/git/git.plugin.zsh
 zinit ice as'completion'
 zinit snippet OMZ::plugins/rust/_rust
@@ -308,16 +319,6 @@ function zlua-or-fzf {
         _zlua | tail
     fi
 }
-
-# direnv
-function _direnv_hook {
-    eval "$(command direnv export zsh)"
-}
-function direnv {
-    command direnv $@
-    _direnv_hook
-}
-add-zsh-hook chpwd _direnv_hook
 
 # experimental
 function nm {
