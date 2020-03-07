@@ -285,7 +285,7 @@ alias 9='cd -9'
 alias l=fuzzy-locate-file
 alias j=zlua-or-fzf
 
-L_IGNORE_RE="\.cache|\.cargo|\.git"
+FUZZY_LOCATE_IGNORE="\.cache|\.cargo|\.git"
 
 # locate a file with word-fuzzy matching and
 # ignore files matching regrex "$L_IGNORE_RE"
@@ -295,17 +295,19 @@ function fuzzy-locate {
         fuzzy="${fuzzy}.*${i}"
     done
 
-    locate -r "." | rg "$fuzzy" | rg -v "$L_IGNORE_RE"
+    locate -r "." | rg "$fuzzy" | rg -v "$FUZZY_LOCATE_IGNORE"
 }
 
 function fuzzy-locate-file {
     local file="$(fuzzy-locate $@ | fzf)"
-    echo -n "\"$file\"" | xsel -b
-    echo "$file"
+    if [[ -n "$file" ]]; then
+        echo -n "\"$file\"" | xsel -b
+        echo "$file"
+    fi
 }
 
 # try jumping to dir in zlua db, if it cannot
-# be found run fuzzy-locate and prompt for file 
+# be found run fuzzy-locate and prompt for file
 # selection with fzf
 function zlua-or-fzf {
     if [[ -n "$@" ]]; then
