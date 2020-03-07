@@ -217,7 +217,7 @@ function silent {
 
 function launch {
     silent "${@}"
-    exit
+    xdo close
 }
 
 function noti {
@@ -231,28 +231,17 @@ function noti {
     fi
 }
 
-# kitty
-function icat {
-   kitty +kitten icat --align left $@
-}
-
 # emacs
-function emacsd {
-    emacs --daemon ${@}
-}
-function et {
-    emacsclient -t ${@} --alternate-editor=""
-}
 function ea {
     emacsclient -e nil --alternate-editor="" &&\
-    silent emacsclient -c ${@}
+        emacsclient -n -c ${@}
 }
 function ec {
-    if xdo id -d -N Emacs; then
+    if xdo id -d -N Emacs &>/dev/null; then
         if [[ -n "${@}" ]]; then
             emacsclient -n ${@}
         else
-            xdo activate -d -N Emacs
+            emacsclient -n "$(pwd)"
         fi
     else
         ea ${@}
@@ -321,27 +310,6 @@ function zlua-or-fzf {
     fi
 }
 
-# lf
-lf () {
-    local tmp="$(mktemp)"
-    export INITIALDIR="$PWD"
-    command lf "$@"
-
-    if [ -f "$HOME/.lfnodir" ]; then
-        rm $HOME/.lfnodir
-    else
-        if [ -f "$tmp" ]; then
-            local dir="$(cat "$tmp")"
-            rm -f "$tmp"
-            if [ -d "$dir" ]; then
-                if [ "$dir" != "$PWD" ]; then
-                    cd "$dir"
-                fi
-            fi
-        fi
-    fi
-}
-
 # direnv
 function _direnv_hook {
     eval "$(command direnv export zsh)"
@@ -353,7 +321,6 @@ function direnv {
 add-zsh-hook chpwd _direnv_hook
 
 # experimental
-
 function nm {
     if [[ -z "$@" ]]; then
         notmuch search tag:unread
