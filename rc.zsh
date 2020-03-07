@@ -278,7 +278,7 @@ alias 8='cd -8'
 alias 9='cd -9'
 
 # zlua + locate
-alias l='(){ fuzzy-locate $@ | fzf }'
+alias l=fuzzy-locate-file
 alias j=zlua-or-fzf
 
 L_IGNORE_RE="\.cache|\.cargo|\.git"
@@ -292,6 +292,12 @@ function fuzzy-locate {
     done
 
     locate -r "." | rg "$fuzzy" | rg -v "$L_IGNORE_RE"
+}
+
+function fuzzy-locate-file {
+    local file="$(fuzzy-locate $@ | fzf)"
+    echo -n "\"$file\"" | xsel -b
+    echo "$file"
 }
 
 # try jumping to dir in zlua db, if it cannot
