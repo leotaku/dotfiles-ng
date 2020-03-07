@@ -27,6 +27,37 @@ export USE_NIX2_COMMAND=true
 HM_VARS_FILE="$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 [[ -e "$HOME_VARS" ]] && . $HM_VARS_FILE
 
+# vi-mode pre setup
+bindkey -v
+
+# terminfo/reliable mappings
+zmodload zsh/terminfo
+typeset -gA K=(
+  'F1'        "$terminfo[kf1]"
+  'F2'        "$terminfo[kf2]"
+  'F3'        "$terminfo[kf3]"
+  'F4'        "$terminfo[kf4]"
+  'F5'        "$terminfo[kf5]"
+  'F6'        "$terminfo[kf6]"
+  'F7'        "$terminfo[kf7]"
+  'F8'        "$terminfo[kf8]"
+  'F9'        "$terminfo[kf9]"
+  'F10'       "$terminfo[kf10]"
+  'F11'       "$terminfo[kf11]"
+  'F12'       "$terminfo[kf12]"
+  'Insert'    "$terminfo[kich1]"
+  'Delete'    "$terminfo[kdch1]"
+  'Home'      "$terminfo[khome]"
+  'PageUp'    "$terminfo[kpp]"
+  'End'       "$terminfo[kend]"
+  'PageDown'  "$terminfo[knp]"
+  'Up'        "$terminfo[kcuu1]"
+  'Left'      "$terminfo[kcub1]"
+  'Down'      "$terminfo[kcud1]"
+  'Right'     "$terminfo[kcuf1]"
+  'BackTab'   "$terminfo[kcbt]"
+)
+
 # manual autoloads
 autoload -Uz edit-command-line
 zle -N edit-command-line
@@ -105,34 +136,6 @@ zstyle ':completion::complete:*' cache-path $ZSH_CACHE_DIR
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,comm -w"
-
-# terminfo/reliable mappings
-zmodload zsh/terminfo
-typeset -gA K=(
-  'F1'        "$terminfo[kf1]"
-  'F2'        "$terminfo[kf2]"
-  'F3'        "$terminfo[kf3]"
-  'F4'        "$terminfo[kf4]"
-  'F5'        "$terminfo[kf5]"
-  'F6'        "$terminfo[kf6]"
-  'F7'        "$terminfo[kf7]"
-  'F8'        "$terminfo[kf8]"
-  'F9'        "$terminfo[kf9]"
-  'F10'       "$terminfo[kf10]"
-  'F11'       "$terminfo[kf11]"
-  'F12'       "$terminfo[kf12]"
-  'Insert'    "$terminfo[kich1]"
-  'Delete'    "$terminfo[kdch1]"
-  'Home'      "$terminfo[khome]"
-  'PageUp'    "$terminfo[kpp]"
-  'End'       "$terminfo[kend]"
-  'PageDown'  "$terminfo[knp]"
-  'Up'        "$terminfo[kcuu1]"
-  'Left'      "$terminfo[kcub1]"
-  'Down'      "$terminfo[kcud1]"
-  'Right'     "$terminfo[kcuf1]"
-  'BackTab'   "$terminfo[kcbt]"
-)
 
 # vi-mode
 bindkey -v
