@@ -148,29 +148,31 @@ bindkey -M vicmd "$K[F7]" vi-insert
 bindkey "^[" vi-cmd-mode
 bindkey -M vicmd "^[" vi-insert
 
-# empty widget
-function do_nothing {
-    :
-}
-zle -N do-nothing do_nothing
+# empty function and widget
+function nothing { : }
+zle -N nothing
 
-# other keybindings
-bindkey '^ ' edit-command-line
-bindkey '^G' history-incremental-pattern-search-backward
+# better defaults
+bindkey "$K[Delete]" delete-char
+bindkey "$K[Insert]" nothing
+bindkey "$K[PageUp]" nothing
+bindkey "$K[PageDown]" nothing
 bindkey '^[[1;5C' emacs-forward-word
 bindkey '^[[1;5D' emacs-backward-word
-bindkey "$K[Delete]" delete-char
-bindkey "$K[Insert]" do-nothing
-bindkey '^[[1;5F' do-nothing
-bindkey '^[[1;5H' do-nothing
-bindkey '^[[2;5~' do-nothing
-bindkey '^[[3;5~' do-nothing
+bindkey '^[[1;5F' nothing
+bindkey '^[[1;5H' nothing
+bindkey '^[[2;5~' nothing
+bindkey '^[[3;5~' nothing
 
 # word deletion
 bindkey '^H' backward-kill-word
 autoload -Uz select-word-style
 WORDCHARS='*?_-~=&;!#$%^:'
 select-word-style normal
+
+# other keybindings
+bindkey '^ ' edit-command-line
+bindkey '^G' history-incremental-pattern-search-backward
 
 # application preferences
 export LS_COLORS
