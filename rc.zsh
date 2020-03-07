@@ -62,71 +62,71 @@ typeset -gA K=(
 autoload -Uz edit-command-line
 zle -N edit-command-line
 
-# zplugin setup
-declare -A ZPLGM
-ZPLGM[HOME_DIR]="$HOME/.zplugin"
-ZPLGM[BIN_DIR]="$ZPLGM[HOME_DIR]/bin"
+# zinit setup
+declare -A ZINIT
+ZINIT[HOME_DIR]="$HOME/.zplugin"
+ZINIT[BIN_DIR]="$ZINIT[HOME_DIR]/bin"
 ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache/zplugin}"
-ZPLGM[ZCOMPDUMP_PATH]="$ZSH_CACHE_DIR/zcompdump"
-mkdir -p "$ZPLGM[HOME_DIR]"
-ln -sfn "$(zplugin-install)" "$ZPLGM[BIN_DIR]"
+ZINIT[ZCOMPDUMP_PATH]="$ZSH_CACHE_DIR/zcompdump"
+mkdir -p "$ZINIT[HOME_DIR]"
+ln -sfn "$(zplugin-install)" "$ZINIT[BIN_DIR]"
 
-# zplugin module
-module_path+=( "$ZPLGM[BIN_DIR]/zmodules/Src" )
+# zinit module
+module_path+=( "$ZINIT[BIN_DIR]/zmodules/Src" )
 zmodload zdharma/zplugin
 
-# zplugin
-source "$ZPLGM[BIN_DIR]/zplugin.zsh"
+# zinit
+source "$ZINIT[BIN_DIR]/zinit.zsh"
 
-zplugin ice wait'0' lucid atload'
+zinit ice wait'0' lucid atload'
 HISTORY_SUBSTRING_SEARCH_FUZZY=true
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=true
-bindkey "$K[PageUp]" history-substring-search-up
-bindkey "$K[PageDown]" history-substring-search-down
-bindkey -M vicmd "$K[PageUp]" history-substring-search-up
-bindkey -M vicmd "$K[PageDown]" history-substring-search-down
 bindkey "$K[Up]" history-substring-search-up
 bindkey "$K[Down]" history-substring-search-down'
-zplugin light zsh-users/zsh-history-substring-search
+zinit light zsh-users/zsh-history-substring-search
 
-zplugin ice wait'0' lucid atload'
+zinit ice lucid atload'
 bindkey "^H" backward-kill-word
 AUTOPAIR_BKSPC_WIDGET=backward-delete-char'
-zplugin light hlissner/zsh-autopair
-zplugin ice wait'0' lucid atload'
-fast-theme $HOME/.config/zsh-sensible-theme.ini -q'
-zplugin light zdharma/fast-syntax-highlighting
+zinit light hlissner/zsh-autopair
 
-zplugin ice wait'0' atinit'zpcompinit' lucid atload'
+zinit ice wait'0' lucid atload'
+fast-theme $HOME/.config/zsh-sensible-theme.ini -q'
+zinit light zdharma/fast-syntax-highlighting
+
+zinit ice wait'0' atinit'zpcompinit' lucid atload'
 ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_AUTOSUGGEST_MANUAL_REBIND=true
 #add-zsh-hook -d precmd _zsh_autosuggest_start
 _zsh_autosuggest_start'
-zplugin light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-autosuggestions
 
-zplugin ice wait'0' has'z' silent pick'/dev/null' atload'
+zinit ice wait'0' has'z' silent pick'/dev/null' atload'
 export _ZL_ADD_ONCE=1
 export _ZL_MATCH_MODE=1
 eval "$(z --init zsh fzf)"'
-zplugin light skywind3000/z.lua
-zplugin light zsh-users/zsh-completions
+zinit light skywind3000/z.lua
+zinit light zsh-users/zsh-completions
 
-zplugin snippet OMZ::plugins/git/git.plugin.zsh
-zplugin ice as'completion'
-zplugin snippet OMZ::plugins/rust/_rust
-zplugin ice as'completion'
-zplugin snippet OMZ::plugins/cargo/_cargo
-zplugin ice as'completion'
-zplugin snippet https://github.com/github/hub/blob/master/etc/hub.zsh_completion
-zplugin ice as'completion'
-zplugin snippet https://github.com/restic/restic/blob/master/doc/zsh-completion.zsh
-zplugin ice as'completion'
-zplugin snippet "$ZPLGM[BIN_DIR]/_zplugin"
+zinit snippet OMZ::plugins/git/git.plugin.zsh
+zinit ice as'completion'
+zinit snippet OMZ::plugins/rust/_rust
+zinit ice as'completion'
+zinit snippet OMZ::plugins/cargo/_cargo
+zinit ice as'completion'
+zinit snippet https://github.com/github/hub/blob/master/etc/hub.zsh_completion
+zinit ice as'completion'
+zinit snippet https://github.com/restic/restic/blob/master/doc/zsh-completion.zsh
+zinit ice as'completion'
+zinit snippet "$ZINIT[BIN_DIR]/_zinit"
 
 PS1=""; RPS1=""
 local starting_dir="$PWD"
-zplugin ice pick'library/elf_load.zsh' multisrc'elves/me.zsh allies/dwarf.zsh allies/rogue.zsh' atload'dwarf_setup; rogue_setup; elf_setup;' lucid
-zplugin load leotaku/village
+zinit ice pick'library/elf_load.zsh' multisrc'elves/me.zsh allies/dwarf.zsh allies/rogue.zsh' atload'dwarf_setup; rogue_setup; elf_setup;' lucid
+zinit load leotaku/village
+#zinit load sindresorhus/pure
+#zinit load geometry-zsh/geometry
+#zinit load romkatv/powerlevel10k
 
 # completion
 zstyle ':compinstall' filename '~/.zshrc'
