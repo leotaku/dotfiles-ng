@@ -138,7 +138,6 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,comm -w"
 
 # vi-mode
-bindkey -v
 bindkey -M vicmd "$K[Home]" beginning-of-line
 bindkey -M vicmd "$K[End]" vi-end-of-line
 bindkey "$K[Home]" beginning-of-line
