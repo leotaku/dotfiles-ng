@@ -41,8 +41,7 @@ local clientkeys = relief.keys.bindkeys(
    {"M-x", relief.method2curry("kill"), "self"},
    {"M-f", cmd.toggle_max, "self"},
    {"M-m", cmd.toggle_float, "self"},
-   {"M-s", awful.placement.centered, "self"},
-   {"M-q", cmd.toggle_fullscreen, "self"}
+   {"M-s", awful.placement.centered, "self"}
 )
 
 local clientbuttons = gears.table.join(
