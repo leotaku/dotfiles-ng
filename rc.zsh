@@ -132,7 +132,7 @@ zinit load leotaku/village
 zstyle ':compinstall' filename "$ZDOTDIR/.zshrc"
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion::complete:*' use-cache 1
-zstyle ':completion::complete:*' cache-path $ZSH_CACHE_DIR
+zstyle ':completion::complete:*' cache-path "$ZSH_CACHE_DIR"
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,comm -w"
