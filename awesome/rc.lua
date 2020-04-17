@@ -155,9 +155,10 @@ client.connect_signal(
       if not awesome.startup then
          awful.client.setslave(c)
          if c.floating then
-            -- local f = awful.placement.scale + awful.placement.centered
-            -- f(c, {to_percent = 0.25})
-            awful.placement.centered(f)
+            if c.height/awful.screen.focused().geometry.height > 0.75 then
+               awful.placement.scale(c, {to_percent = 0.75})
+            end
+            awful.placement.centered(c)
          end
       end
 
