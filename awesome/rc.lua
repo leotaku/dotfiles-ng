@@ -16,14 +16,6 @@ local config_path = os.getenv("HOME") .. "/.config/awesome/"
 local themes_path = config_path .. "theming/"
 require("lib.errors")
 
--- Themes
-local theme_collection = {
-   "automata"
-};
-
--- Change this number to use a different theme
-local theme_name = theme_collection[1]
-
 -- Import libraries
 local gears = require("gears")
 local awful = require("awful")
@@ -54,16 +46,15 @@ require("behavior.sloppy_focus")
 require("behavior.window_mouse")
 
 -- Set visuals
-beautiful.init(themes_path .. theme_name .. "/theme.lua")
+beautiful.init(themes_path .. "automata" .. "/theme.lua")
+
+-- Set wallpaper
+_G.wallpaper = os.getenv("HOME") .. "/.wallpaper.jpg"
 require("theming.wallpaper")
 
 -- Widgets
-require("widget.org_agenda")
-
-if theme_name == "automata" then
-   require("theming.decorations")
-   require("theming.bar")
-end
+require("theming.decorations")
+require("theming.bar")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -88,22 +79,7 @@ awful.layout.layouts = {
 -- Menubar configuration
 menubar.utils.terminal = terminal
 
-local names = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" }
-local tags = {}
-
-function mod0(m, i)
-   local n = i % m
-   if n == 0 then
-      return m
-   else
-      return n
-   end
-end
-
-function screen_for(i)
-   local id = mod0(#screen, i)
-   return screen[id]
-end
+local names = { "I", "II", "III", "IV", "V", "VI" }
 
 for i, name in ipairs(names) do
    local tag = awful.tag.add(
@@ -114,14 +90,14 @@ for i, name in ipairs(names) do
       }
    )
 
-   table.insert(tags, tag)
-
    globalkeys = gears.table.join(
       globalkeys,
       -- View tag only.
       awful.key({ modkey }, "#" .. i + 9,
          function ()
-            -- awful.screen.focus(tag.screen)
+            if awful.screen.focused == tag.screen then
+               awful.screen.focus(tag.screen)
+            end
             tag:view_only()
          end,
          { description = "view tag #"..i, group = "tag" }
@@ -137,28 +113,7 @@ for i, name in ipairs(names) do
          { description = "move focused client to tag #"..i, group = "tag" }
       )
    )
-
 end
-
-tag.connect_signal(
-   "request::screen",
-   function(t)
-      for s in screen do
-         if s ~= t.screen and
-            s.geometry.x == t.screen.geometry.x and
-            s.geometry.y == t.screen.geometry.y and
-            s.geometry.width == t.screen.geometry.width and
-         s.geometry.height == t.screen.geometry.height then
-            local t2 = awful.tag.find_by_name(s, t.name)
-            if t2 then
-               t:swap(t2)
-            else
-               t.screen = s
-            end
-            return
-         end
-      end
-end)
 
 awful.screen.connect_for_each_screen(
    function(s)
@@ -169,7 +124,6 @@ awful.screen.connect_for_each_screen(
       end
    end
 )
-
 
 awful.rules.rules = gears.table.join(
    awful.rules.rules,
@@ -208,10 +162,8 @@ client.connect_signal(
          end
       end
 
-      if awesome.startup
-         and not c.size_hints.user_position
-      and not c.size_hints.program_position then
-         -- Prevent clients from being unreachable after screen count changes.
+      -- Prevent clients from being unreachable after screen count changes.
+      if awesome.startup then
          awful.placement.no_offscreen(c)
       end
    end
