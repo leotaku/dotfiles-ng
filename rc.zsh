@@ -67,7 +67,7 @@ ln -sfn "$(zplugin-install)" "$ZINIT[BIN_DIR]"
 module_path+=( "$ZINIT[BIN_DIR]/zmodules/Src" )
 zmodload zdharma/zplugin
 
-# zinit setup
+# zinit load
 source "$ZINIT[BIN_DIR]/zinit.zsh"
 
 zinit ice wait'0' lucid atload'
