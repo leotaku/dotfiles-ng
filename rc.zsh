@@ -123,9 +123,9 @@ zinit snippet https://github.com/restic/restic/blob/master/doc/zsh-completion.zs
 zinit ice as'completion'
 zinit snippet "$ZINIT[BIN_DIR]/_zinit"
 
-PS1=""; RPS1=""
+PS1="%~> "; RPS1=""
 local starting_dir="$PWD"
-zinit ice pick'library/elf_load.zsh' multisrc'elves/me.zsh allies/dwarf.zsh allies/rogue.zsh' atload'dwarf_setup; rogue_setup; elf_setup;' lucid
+zinit ice atinit'VILLAGE=(reference dwarf rogue)' lucid
 zinit load leotaku/village
 
 # completion
