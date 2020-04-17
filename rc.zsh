@@ -194,6 +194,7 @@ alias transmission="transmission-remote-gtk"
 alias transmission-cli="transmission-remote-cli"
 
 # config-aliases
+alias ls="ls --color=auto"
 alias diff="diff --color=auto"
 
 # helper functions
@@ -232,23 +233,15 @@ function noti {
 }
 
 # emacs
-function ea {
-    emacsclient -e nil --alternate-editor="" &&\
-        emacsclient -n -c ${@}
-}
 function ec {
-    if xdo id -d -N Emacs &>/dev/null; then
-        if [[ -n "${@}" ]]; then
-            emacsclient -n ${@}
-        else
-            emacsclient -n "$(pwd)"
-        fi
-    else
-        ea ${@}
-    fi
+    emacsclient --alternate-editor="systemctl --user status emacs.service" -n -c ${@}
 }
-alias ek="emacsclient -e '(kill-emacs)'"
-alias eks="emacsclient -e '(save-buffers-kill-emacs)'"
+function ek {
+    systemctl --user restart emacs.service
+}
+function eks {
+    emacsclient -e '(save-buffers-kill-emacs)' && systemctl --user restart emacs.service
+}
 
 # easydirs
 setopt auto_pushd
