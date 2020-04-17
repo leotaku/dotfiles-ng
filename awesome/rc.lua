@@ -116,7 +116,7 @@ end
 
 awful.screen.connect_for_each_screen(
    function(s)
-      -- View tag one
+      -- View only one tag
       local tag = s.tags[1]
       if tag then
          tag:view_only()
