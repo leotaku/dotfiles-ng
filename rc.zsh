@@ -33,29 +33,20 @@ bindkey -v
 # terminfo/reliable mappings
 zmodload zsh/terminfo
 typeset -gA K=(
-  'F1'        "$terminfo[kf1]"
-  'F2'        "$terminfo[kf2]"
-  'F3'        "$terminfo[kf3]"
-  'F4'        "$terminfo[kf4]"
-  'F5'        "$terminfo[kf5]"
-  'F6'        "$terminfo[kf6]"
-  'F7'        "$terminfo[kf7]"
-  'F8'        "$terminfo[kf8]"
-  'F9'        "$terminfo[kf9]"
-  'F10'       "$terminfo[kf10]"
-  'F11'       "$terminfo[kf11]"
-  'F12'       "$terminfo[kf12]"
-  'Insert'    "$terminfo[kich1]"
-  'Delete'    "$terminfo[kdch1]"
-  'Home'      "$terminfo[khome]"
-  'PageUp'    "$terminfo[kpp]"
-  'End'       "$terminfo[kend]"
-  'PageDown'  "$terminfo[knp]"
-  'Up'        "$terminfo[kcuu1]"
-  'Left'      "$terminfo[kcub1]"
-  'Down'      "$terminfo[kcud1]"
-  'Right'     "$terminfo[kcuf1]"
-  'BackTab'   "$terminfo[kcbt]"
+    'F7'        "^[[18~"
+    'Home'      "^[[1~"
+    'Insert'    "^[[2~"
+    'Delete'    "^[[3~"
+    'End'       "^[[4~"
+    'PageUp'    "^[[5~"
+    'PageDown'  "^[[6~"
+    'Up'        "^[[A"
+    'Left'      "^[[D"
+    'Down'      "^[[B"
+    'Right'     "^[[C"
+    'BackTab'   "^[[Z"
+    'C-Right'   "^[[1;5C"
+    'C-Left'    "^[[1;5D"
 )
 
 # manual autoloads
@@ -170,12 +161,13 @@ bindkey "$K[Delete]" delete-char
 bindkey "$K[Insert]" nothing
 bindkey "$K[PageUp]" nothing
 bindkey "$K[PageDown]" nothing
-bindkey '^[[1;5C' emacs-forward-word
-bindkey '^[[1;5D' emacs-backward-word
-bindkey '^[[1;5F' nothing
-bindkey '^[[1;5H' nothing
-bindkey '^[[2;5~' nothing
-bindkey '^[[3;5~' nothing
+bindkey "$K[BackTab]" nothing
+bindkey "$K[C-Right]" emacs-forward-word
+bindkey "$K[C-Left]" emacs-backward-word
+bindkey "^[[1;5F" nothing
+bindkey "^[[1;5H" nothing
+bindkey "^[[2;5~" nothing
+bindkey "^[[3;5~" nothing
 
 # word deletion
 bindkey '^H' backward-kill-word
