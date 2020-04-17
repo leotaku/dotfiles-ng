@@ -89,7 +89,6 @@ zinit load zdharma/fast-syntax-highlighting
 zinit ice wait'0' atinit'zpcompinit' lucid atload'
 ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_AUTOSUGGEST_MANUAL_REBIND=true
-#add-zsh-hook -d precmd _zsh_autosuggest_start
 _zsh_autosuggest_start'
 zinit load zsh-users/zsh-autosuggestions
 zinit load zsh-users/zsh-completions
@@ -128,9 +127,6 @@ PS1=""; RPS1=""
 local starting_dir="$PWD"
 zinit ice pick'library/elf_load.zsh' multisrc'elves/me.zsh allies/dwarf.zsh allies/rogue.zsh' atload'dwarf_setup; rogue_setup; elf_setup;' lucid
 zinit load leotaku/village
-#zinit load sindresorhus/pure
-#zinit load geometry-zsh/geometry
-#zinit load romkatv/powerlevel10k
 
 # completion
 zstyle ':compinstall' filename "$ZDOTDIR/.zshrc"
