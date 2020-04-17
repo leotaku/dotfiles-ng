@@ -93,7 +93,7 @@ for i, name in ipairs(names) do
    globalkeys = gears.table.join(
       globalkeys,
       -- View tag only.
-      awful.key({ modkey }, "#" .. i + 9,
+      awful.key({ modkey }, "#" .. i + 23,
          function ()
             if awful.screen.focused == tag.screen then
                awful.screen.focus(tag.screen)
@@ -103,8 +103,7 @@ for i, name in ipairs(names) do
          { description = "view tag #"..i, group = "tag" }
       ),
       -- Move client to tag.
-      awful.key(
-         { modkey, "Shift" }, "#" .. i + 9,
+      awful.key({ modkey, "Shift" }, "#" .. i + 23,
          function ()
             if client.focus then
                client.focus:move_to_tag(tag)
