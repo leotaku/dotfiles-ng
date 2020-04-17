@@ -8,19 +8,18 @@
 
 -- Imports
 local awful = require("awful")
-local beautiful = require("beautiful")
 local gears = require("gears")
 
 -- Code
+local wallpaper = _G.wallpaper
+
 local function set_wallpaper(s)
-   -- Wallpaper
-   if beautiful.wallpaper then
-      local wallpaper = beautiful.wallpaper
-      -- If wallpaper is a function, call it with the screen
-      if type(wallpaper) == "function" then
-         wallpaper = wallpaper(s)
+   if wallpaper then
+      -- If wallpaper is a list, select a random one
+      if type(wallpaper) == "table" then
+         wallpaper = wallpaper[math.random(#wallpaper)]
       end
-      gears.wallpaper.maximized(wallpaper, s, true)
+      gears.wallpaper.maximized(wallpaper, s)
    end
 end
 
