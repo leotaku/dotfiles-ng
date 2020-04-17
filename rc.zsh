@@ -96,7 +96,9 @@ zinit load zsh-users/zsh-completions
 zinit ice wait'0' has'z' lucid pick'/dev/null' atload'
 export _ZL_DATA="${ZDOTDIR}/.zlua"
 export _ZL_ADD_ONCE=1
+export _ZL_ADD_ONCE=1
 export _ZL_MATCH_MODE=1
+export _ZL_HYPHEN=1
 eval "$(z --init zsh fzf)"'
 zinit load skywind3000/z.lua
 
