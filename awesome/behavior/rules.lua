@@ -19,7 +19,7 @@ awful.rules.rules = gears.table.join(
 
          properties = { floating = true },
       },
-      
+
       -- Ignore size hints for most windows
       {
          rule_any = {
@@ -31,7 +31,7 @@ awful.rules.rules = gears.table.join(
          },
          properties = { size_hints_honor = false }
       },
-      
+
       -- Set Firefox to always map on the tag named "2" on screen 1
       {
          rule = { class = "Firefox" },
