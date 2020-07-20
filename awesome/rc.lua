@@ -27,7 +27,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 local dpi = beautiful.xresources.apply_dpi
 
 -- Global variables
-_G.terminal = "urxvtc -e tmux"
+_G.terminal = os.getenv("TERMINAL") .. " -e tmux"
 _G.editor = os.getenv("EDITOR") or "nano"
 _G.editor_cmd = terminal .. " -e " .. editor
 
