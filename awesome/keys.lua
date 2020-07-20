@@ -15,7 +15,7 @@ _G.modkey = "Mod4"
 local globalkeys = relief.keys.bindkeys(
    {},
    -- Focus
-   {"M-space", awful.screen.focus_relative, 1},
+   {"M-space", cmd.inc_layout, 1},
    {"M-Tab", awful.client.focus.byidx, 1},
    -- Layout
    -- Directional focus
@@ -39,7 +39,8 @@ local clientkeys = relief.keys.bindkeys(
    {},
    {"M-x", relief.method2curry("kill"), "self"},
    {"M-f", cmd.toggle_max, "self"},
-   {"M-m", cmd.toggle_float, "self"},
+   {"M-m", cmd.toggle_fullscreen, "self"},
+   {"M-n", cmd.toggle_float, "self"},
    {"M-s", awful.placement.centered, "self"}
 )
 
