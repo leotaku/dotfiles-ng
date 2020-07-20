@@ -11,14 +11,15 @@ zmodload zsh/zprof
 # basic options
 setopt autocd extendedglob
 setopt interactivecomments
-setopt sharehistory
+setopt histignorealldups
+setopt noextendedhistory
+setopt nosharehistory incappendhistory
 unsetopt beep
 histchars=#
 
 # basic settings
 ZDOTDIR="${ZDOTDIR:-$HOME}"
 ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
-HISTFILE="${ZDOTDIR}/.histfile"
 HISTSIZE=100000
 SAVEHIST=100000
 LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:';
@@ -49,6 +50,8 @@ typeset -gA K=(
     'BackTab'   "^[[Z"
     'C-Right'   "^[[1;5C"
     'C-Left'    "^[[1;5D"
+    'C-Up'      "^[[1;5A"
+    'C-Down'    "^[[1;5B"
 )
 
 # manual autoloads
@@ -61,7 +64,7 @@ ZINIT[HOME_DIR]="${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
 ZINIT[BIN_DIR]="$ZINIT[HOME_DIR]/bin"
 ZINIT[ZCOMPDUMP_PATH]="$ZSH_CACHE_DIR/zcompdump"
 mkdir -p "$ZINIT[HOME_DIR]"
-ln -sfn "$(zplugin-install)" "$ZINIT[BIN_DIR]"
+ln -sfn "$(zinit-install)" "$ZINIT[BIN_DIR]"
 
 # zinit module
 module_path+=( "$ZINIT[BIN_DIR]/zmodules/Src" )
@@ -93,31 +96,13 @@ _zsh_autosuggest_start'
 zinit load zsh-users/zsh-autosuggestions
 zinit load zsh-users/zsh-completions
 
-zinit ice wait'0' has'z' lucid pick'/dev/null' atload'
-export _ZL_DATA="${ZDOTDIR}/.zlua"
-export _ZL_ADD_ONCE=1
-export _ZL_ADD_ONCE=1
-export _ZL_MATCH_MODE=1
-export _ZL_HYPHEN=1
-eval "$(z --init zsh fzf)"'
-zinit load skywind3000/z.lua
-
-zinit ice wait'0' has'direnv' lucid pick'/dev/null' atload'
-function _direnv_hook {
-    eval "$(command direnv export zsh)"
-}
-function direnv {
-    command direnv $@
-    _direnv_hook
-}
-add-zsh-hook chpwd _direnv_hook'
-zinit load direnv/direnv
-
-zinit snippet OMZ::plugins/git/git.plugin.zsh
+zinit snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh
 zinit ice as'completion'
-zinit snippet OMZ::plugins/rust/_rust
+zinit snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/rust/_rust
 zinit ice as'completion'
-zinit snippet OMZ::plugins/cargo/_cargo
+zinit snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/rustup/_rustup
+zinit ice as'completion'
+zinit snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/cargo/_cargo
 zinit ice as'completion'
 zinit snippet https://github.com/github/hub/blob/master/etc/hub.zsh_completion
 zinit ice as'completion'
@@ -164,6 +149,8 @@ bindkey "$K[PageDown]" nothing
 bindkey "$K[BackTab]" nothing
 bindkey "$K[C-Right]" emacs-forward-word
 bindkey "$K[C-Left]" emacs-backward-word
+bindkey "$K[C-Up]" nothing
+bindkey "$K[C-Down]" nothing
 bindkey "^[[1;5F" nothing
 bindkey "^[[1;5H" nothing
 bindkey "^[[2;5~" nothing
@@ -199,44 +186,27 @@ alias transmission-cli="transmission-remote-cli"
 alias ls="ls --color=auto"
 alias diff="diff --color=auto"
 
-# helper functions
-function swap {
-    [[ -z "$1" ]] || [[ -z "$2" ]] && exit 1
-    mv "$1" ".tmp.$1" || exit 1
-    mv "$2" "$1" || exit 1
-    mv ".tmp.$1" "$2"
+# direnv
+function _direnv_hook {
+    eval "$(command direnv export zsh)"
 }
-
-function lazy {
-    tmpfile="$(mktemp)"
-    sponge > "$tmpfile"
-    eval "${@} < $tmpfile"
-    rm "$tmpfile"
+function direnv {
+    command direnv $@
+    _direnv_hook
 }
-
-function silent {
-    $@ &>/dev/null &|
-}
-
-function launch {
-    silent "${@}"
-    xdo close
-}
-
-function noti {
-    cmd="${@}"
-    out="$(eval ${cmd} &>/dev/stderr)"
-
-    if [[ $? == 0 ]]; then
-        notify-send "${cmd}" "Done!"
-    else
-        notify-send "${cmd}" "Failed!"
-    fi
-}
+add-zsh-hook chpwd _direnv_hook
 
 # emacs
 function ec {
-    emacsclient --alternate-editor="systemctl --user status emacs.service" -n -c ${@}
+    local id="$(xdo id -d -N Emacs)"
+    if [[ -n "$id" ]]; then
+        xdo activate -r "$id"
+        if [[ -n "${@}" ]]; then
+            emacsclient -n ${@}
+        fi
+    else
+        emacsclient --alternate-editor="systemctl --user status emacs.service" -n -c ${@}
+    fi
 }
 function ek {
     systemctl --user restart emacs.service
@@ -272,8 +242,8 @@ alias j=zlua-or-fzf
 
 FUZZY_LOCATE_IGNORE="\.cache|\.cargo|\.git"
 
-# locate a file with word-fuzzy matching and
-# ignore files matching regrex "$L_IGNORE_RE"
+# Locate a file with fuzzy REGEXP matching and while ignoring files
+# matching the REGEXP $L_IGNORE_RE.
 function fuzzy-locate {
     local fuzzy=""
     for i in ${@}; do
@@ -291,9 +261,8 @@ function fuzzy-locate-file {
     fi
 }
 
-# try jumping to dir in zlua db, if it cannot
-# be found run fuzzy-locate and prompt for file
-# selection with fzf
+# Try jumping to dir in zlua db. If it cannot be found, run
+# fuzzy-locate and prompt for file selection with fzf.
 function zlua-or-fzf {
     if [[ -n "$@" ]]; then
         local dir="$(_zlua -e ${@})"
@@ -307,6 +276,14 @@ function zlua-or-fzf {
     fi
 }
 
+if which z&>/dev/null; then
+    export _ZL_DATA="${ZDOTDIR}/.zlua"
+    export _ZL_ADD_ONCE=1
+    export _ZL_MATCH_MODE=1
+    export _ZL_HYPHEN=1
+    eval "$(z --init zsh fzf)"
+fi
+
 # experimental
 function nm {
     if [[ -z "$@" ]]; then
@@ -317,10 +294,7 @@ function nm {
     fi
 }
 
-function zsudo {
-    sudo zsh -c "$functions[$1]" "$@"
-}
-
+# fix nix
 function nix-shell {
     command nix-shell --run "exec zsh" $@
 }
