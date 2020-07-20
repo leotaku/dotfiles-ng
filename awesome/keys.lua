@@ -29,7 +29,6 @@ local globalkeys = relief.keys.bindkeys(
    {"M-Up",    awful.client.swap.bydirection, "up"},
    {"M-Right", awful.client.swap.bydirection, "right"},
    -- Spawn apps
-   -- TODO: put environment variables in separate file
    {"M-Return", awful.spawn, _G.terminal or "xterm"},
    {"M-d", awful.spawn, "rofi -show drun"},
    -- AwesomeWM

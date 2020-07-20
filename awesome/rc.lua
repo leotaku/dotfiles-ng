@@ -9,7 +9,6 @@
 --  `--`        `--`  `--`  `--`-----``  `--`---'    `--`--''   `--`./  `--``--`-----``
 
 -- My AwesomeWM configuration
--- Large parts have been stolen from Elenapan, thanks
 
 -- Setup
 local config_path = os.getenv("HOME") .. "/.config/awesome/"
