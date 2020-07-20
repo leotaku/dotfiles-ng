@@ -54,6 +54,7 @@ require("theming.wallpaper")
 -- Widgets
 require("theming.decorations")
 require("theming.bar")
+require("widget.notification_center")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
