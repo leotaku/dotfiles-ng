@@ -79,38 +79,42 @@ awful.layout.layouts = {
 menubar.utils.terminal = terminal
 
 local names = { "I", "II", "III", "IV", "V", "VI" }
+local offsets = { 23, 9 }
 
-for i, name in ipairs(names) do
-   local tag = awful.tag.add(
-      name,
-      {
-         screen = screen[1],
-         layout = awful.layout.layouts[1],
-      }
-   )
-
-   globalkeys = gears.table.join(
-      globalkeys,
-      -- View tag only.
-      awful.key({ modkey }, "#" .. i + 23,
-         function ()
-            if awful.screen.focused == tag.screen then
-               awful.screen.focus(tag.screen)
-            end
-            tag:view_only()
-         end,
-         { description = "view tag #"..i, group = "tag" }
-      ),
-      -- Move client to tag.
-      awful.key({ modkey, "Shift" }, "#" .. i + 23,
-         function ()
-            if client.focus then
-               client.focus:move_to_tag(tag)
-            end
-         end,
-         { description = "move focused client to tag #"..i, group = "tag" }
+for I=1,screen.count() do
+   local offset = offsets[I]
+   for i, name in ipairs(names) do
+      local tag = awful.tag.add(
+         name,
+         {
+            screen = screen[I],
+            layout = awful.layout.layouts[1],
+         }
       )
-   )
+
+      globalkeys = gears.table.join(
+         globalkeys,
+         -- View tag only.
+         awful.key({ modkey }, "#" .. (offset + i),
+            function ()
+               if awful.screen.focused == tag.screen then
+                  awful.screen.focus(tag.screen)
+               end
+               tag:view_only()
+            end,
+            { description = "view tag #"..i, group = "tag" }
+         ),
+         -- Move client to tag.
+         awful.key({ modkey, "Shift" }, "#" .. (offset + i),
+            function ()
+               if client.focus then
+                  client.focus:move_to_tag(tag)
+               end
+            end,
+            { description = "move focused client to tag #"..i, group = "tag" }
+         )
+      )
+   end
 end
 
 awful.screen.connect_for_each_screen(
