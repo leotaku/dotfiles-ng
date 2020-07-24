@@ -1,7 +1,12 @@
 # dotfiles
 
-+ `rc.zsh` :: zsh configuration
-  + `zsh-sensible-theme.ini` :: zsh color theme
-+ `tmux.conf` :: tmux configuration
-+ `awesome` :: awesomewm configuration
-+ `bat.config` :: bat configuration
++ `config` :: directory for configurations
+  + `fish` :: fish shell
+  + `tmux/tmux.conf` :: tmux terminal multiplexer
++ `Justfile` :: task-runner stow commands
+
+and more
+
+## License
+
+[MIT](./LICENSE) © 2019-2020 Leo Gaskin
