@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Terminal
+GenericName=Tmux in Terminal
+Comment=
+Exec=tmux
+Icon=terminal
+Terminal=true
+Type=Application
+Categories=Application;Development;
