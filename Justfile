@@ -1,8 +1,12 @@
-# Variables
-
-config_dir := "$HOME/.config"
-
 # Commands
 
-stow:
-	stow --verbose=2 -t "{{config_dir}}" config
+stow: config desktop home systemd
+
+config:  (link "config"  "$HOME/.config")
+desktop: (link "desktop" "$HOME/.local/share/applications")
+home:    (link "home"    "$HOME")
+systemd: (link "systemd" "$HOME/.config/systemd/user")
+
+link package target:
+	mkdir -p "{{target}}"
+	stow --verbose=2 -t "{{target}}" "{{package}}"
