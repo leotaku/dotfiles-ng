@@ -1,0 +1,15 @@
+[Install]
+WantedBy=default.target
+
+[Service]
+Type=forking
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/env xcape -e "ISO_Level3_Shift=Escape"
+Restart=always
+RestartSec=1
+
+[Unit]
+After=graphical-session-pre.target
+Description=Xcape custom key bindings
+Documentation=man:xcape(1)
+PartOf=graphical-session.target

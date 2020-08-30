@@ -1,0 +1,13 @@
+[Install]
+WantedBy=default.target
+
+[Service]
+ExecStart=/usr/bin/env emacs --fg-daemon
+ExecStop=/usr/bin/env emacsclient --eval '(kill-emacs)'
+Restart=on-failure
+
+[Unit]
+After=basic.target
+Description=Emacs: the extensible, self-documenting text editor
+Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
+X-RestartIfChanged=false
