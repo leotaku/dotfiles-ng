@@ -1,6 +1,11 @@
 configuration {
-  modi:       "window,drun,ssh,combi";
-  theme:      "material";
-  font:       "Fira Mono 12";
-  combi-modi: "window,drun,ssh";
+    modi:       "window,drun,ssh,combi";
+    theme:      "material";
+    font:       "Fira Mono 12";
+    combi-modi: "window,drun,ssh";
+}
+
+window {
+    x-offset:     0px;
+    y-offset:     33px;
 }

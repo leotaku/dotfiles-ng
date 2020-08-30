@@ -39,8 +39,6 @@ configuration {
 window {
 	location:	  west;
 	anchor:		  west;
-	x-offset:     0px;
-	y-offset:     33px;
 	height:		  100%;
 	width:		  400px;
 	orientation:  vertical;
