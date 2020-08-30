@@ -2,7 +2,11 @@
 set fish_key_bindings fish_vi_key_bindings
 
 # Cursor change based on mode
-function fish_vi_cursor --on-variable fish_bind_mode --on-event fish_focus_in --on-event fish_prompt_fixed
+function fish_vi_cursor
+    echo -en "\033[6 q"
+end
+
+function fish_vi_cursor_handle --on-variable fish_bind_mode --on-event fish_focus_in --on-event fish_prompt_fixed
     if test $fish_bind_mode = "insert"
         echo -en "\033[6 q"
     else if test $fish_bind_mode = "default"
