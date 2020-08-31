@@ -1,0 +1,12 @@
+[user]
+email = "leo.gaskin@brg-feldkirchen.at"
+name = "Leo Gaskin"
+
+[github]
+user = "leotaku"
+
+[diff]
+algorithm = "histogram"
+
+[pull]
+ff = "only"
