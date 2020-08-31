@@ -42,3 +42,7 @@ end
 # Aliases
 alias ls='ls --color=tty --group-directories-first'
 alias diff='diff --color=auto'
+
+function nix
+    SHELL=fish command nix $argv
+end
