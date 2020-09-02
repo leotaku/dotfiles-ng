@@ -3,7 +3,8 @@ local sidebar = wibox {
    ontop = false,
    widget = wibox.layout.align.vertical,
    ---
-   height = screen[1].geometry.height - 33,
+   screen = screen.primary,
+   height = screen.primary.geometry.height - 33,
    width = 400,
 }
 

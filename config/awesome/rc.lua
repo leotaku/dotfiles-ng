@@ -84,11 +84,13 @@ local offsets = { 23, 9 }
 
 for I=1,screen.count() do
    local offset = offsets[I]
+   local this_screen = screen[I]
+
    for i, name in ipairs(names) do
       local tag = awful.tag.add(
          name,
          {
-            screen = screen[I],
+            screen = this_screen,
             layout = awful.layout.layouts[1],
          }
       )
@@ -98,9 +100,7 @@ for I=1,screen.count() do
          -- View tag only.
          awful.key({ modkey }, "#" .. (offset + i),
             function ()
-               if awful.screen.focused == tag.screen then
-                  awful.screen.focus(tag.screen)
-               end
+               awful.screen.focus(this_screen)
                tag:view_only()
             end,
             { description = "view tag #"..i, group = "tag" }
