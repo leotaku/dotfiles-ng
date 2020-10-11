@@ -46,15 +46,13 @@ require("behavior.window_mouse")
 
 -- Set visuals
 beautiful.init(themes_path .. "automata" .. "/theme.lua")
+require("theming.decorations")
+require("theming.bar")
+require("widget.notification_center")
 
 -- Set wallpaper
 _G.wallpaper = os.getenv("HOME") .. "/.wallpaper.jpg"
 require("theming.wallpaper")
-
--- Widgets
-require("theming.decorations")
-require("theming.bar")
-require("widget.notification_center")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
