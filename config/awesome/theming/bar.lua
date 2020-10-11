@@ -18,20 +18,6 @@ local dpi = beautiful.xresources.apply_dpi
 local read_file = utils.read_file
 
 -- Code
-local helper = {
-   sep = wibox.widget {
-      {
-         layout = wibox.container.margin,
-         left = dpi(1),
-      },
-      {
-         markup = "|",
-         widget = wibox.widget.textbox,
-      },
-      layout = wibox.layout.fixed.horizontal
-   }
-}
-
 local function create_slider(arg)
    local slider = wibox.widget {
       opacity             = 0,
@@ -63,8 +49,8 @@ local function create_slider(arg)
       slider,
       {
          progress,
-         top = dpi(7),
-         bottom = dpi(7),
+         top = dpi(6),
+         bottom = dpi(6),
          layout = wibox.container.margin,
       },
       layout = wibox.layout.stack,
@@ -82,8 +68,8 @@ local function create_progress(arg)
          color = arg.color,
          background_color = arg.background_color,
       },
-      top = dpi(7),
-      bottom = dpi(7),
+      top = dpi(6),
+      bottom = dpi(6),
       layout = wibox.container.margin,
       set_value = function(self, val)
         self.progress.value = val
@@ -171,7 +157,6 @@ local function create(s)
       filter  = awful.widget.taglist.filter.all,
       layout   = {
          spacing = dpi(7),
-         --spacing_widget = helper.sep,
          layout  = wibox.layout.fixed.horizontal,
       },
    }
@@ -214,22 +199,13 @@ local function create(s)
       end
    )
 
-   local mymail = wibox.widget {
-      awful.widget.watch('notmuch count tag:unread', 5),
-      wibox.widget.textbox('Mail'),
-      spacing = dpi(3),
-      layout = wibox.layout.fixed.horizontal,
-   };
-
-   local top_bar = awful.wibar(
-      {
-         position = "top",
-         screen = s,
-         width = s.geometry.width,
-         -- height = dpi(27),
-         bg = beautiful.black,
-      }
-   )
+   local top_bar = awful.wibar {
+      position = "top",
+      height = dpi(20),
+      screen = s,
+      width = s.geometry.width,
+      bg = beautiful.black,
+   }
 
    top_bar:setup {
       {
@@ -278,7 +254,10 @@ local function create(s)
                mytextclock,
                mymail,
                spacing = dpi(10),
-               spacing_widget = helper.sep,
+               spacing_widget = {
+                  markup = "|",
+                  widget = wibox.widget.textbox,
+               },
                layout = wibox.layout.fixed.horizontal,
             },
             layout = wibox.layout.align.horizontal,

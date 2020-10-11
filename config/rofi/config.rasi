@@ -7,5 +7,5 @@ configuration {
 
 window {
     x-offset:     0px;
-    y-offset:     33px;
+    y-offset:     30px;
 }
