@@ -2,6 +2,7 @@
 export TERMINAL="urxvtc"
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export QT_SCALE_FACTOR="1.0"
+source "$HOME"/.config/user-dirs.sh
 
 # Load Xresources
 xrdb -merge "$HOME/.config/Xresources"
