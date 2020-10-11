@@ -44,5 +44,5 @@ alias ls='ls --color=tty --group-directories-first'
 alias diff='diff --color=auto'
 
 function nix
-    SHELL=fish command nix $argv
+    SHELL=fish IN_NIX_SHELL=1 command nix $argv
 end
