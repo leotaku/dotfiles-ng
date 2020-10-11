@@ -143,7 +143,12 @@ awful.rules.rules = gears.table.join(
             screen = awful.screen.preferred,
             placement = awful.placement.no_overlap+awful.placement.no_offscreen,
          }
-      }
+      },
+      {
+         rule_any = { type = { "normal", "dialog" } },
+         properties = { titlebars_enabled = true }
+      },
+
    }
 )
 
