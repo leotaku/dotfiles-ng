@@ -79,7 +79,7 @@ awful.layout.layouts = {
 -- Menubar configuration
 menubar.utils.terminal = terminal
 
-local names = { "I", "II", "III", "IV", "V", "VI" }
+local names = { "1", "2", "3", "4", "5", "6" }
 local offsets = { 23, 9 }
 
 for I=1,screen.count() do
