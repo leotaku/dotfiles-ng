@@ -9,4 +9,4 @@ systemd: (link "systemd" "$HOME/.config/systemd/user")
 
 link package target:
 	mkdir -p "{{target}}"
-	stow --verbose=2 -t "{{target}}" "{{package}}"
+	stow --dotfiles --verbose=2 -t "{{target}}" "{{package}}"
