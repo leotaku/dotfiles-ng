@@ -98,7 +98,9 @@ for I=1,screen.count() do
          -- View tag only.
          awful.key({ modkey }, "#" .. (offset + i),
             function ()
-               awful.screen.focus(this_screen)
+               if this_screen ~= mouse.screen then
+                  awful.screen.focus(this_screen)
+               end
                tag:view_only()
             end,
             { description = "view tag #"..i, group = "tag" }

@@ -10,8 +10,8 @@ local function move_mouse(c)
          if c.valid then
             mouse.coords (
                {
-                  x = c.x + c.width *(c.rel_x or 0.5),
-                  y = c.y + c.height*(c.rel_y or 0.5),
+                  x = c.x + c.width  * (c.rel_x or 0.5),
+                  y = c.y + c.height * (c.rel_y or 0.5),
                },
                true
             )
