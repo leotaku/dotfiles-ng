@@ -29,7 +29,6 @@ function fish_prompt_preexec --on-event fish_preexec
     fish_prompt_hide
     fish -c 'sleep 0.1 && echo -en "\033[?25h"' &
     set -g FISH_PROMPT_PID (jobs -lp)
-    disown $FISH_PROMPT_PID
 end
 
 function fish_prompt_hide
@@ -47,4 +46,9 @@ bind -M visual \cl fish_prompt_clear
 bind \cl fish_prompt_clear
 
 function fish_mode_prompt
+end
+
+function exit
+    kill $FISH_PROMPT_PID &>/dev/null
+    builtin exit
 end
