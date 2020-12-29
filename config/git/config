@@ -10,3 +10,6 @@ algorithm = "histogram"
 
 [pull]
 ff = "only"
+
+[core]
+askpass =
