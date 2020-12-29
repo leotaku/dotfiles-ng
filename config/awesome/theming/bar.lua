@@ -161,7 +161,7 @@ local function create(s)
       },
    }
 
-   local mytextclock = wibox.widget.textclock("%H:%M")
+   local mytextclock = awful.widget.watch("date '+%H:%M'", 1)
 
    local cal_popup = awful.popup {
       ontop = true,
