@@ -12,8 +12,8 @@ awful.rules.rules = gears.table.join(
       {
          rule_any = {
             name = {
-               "Event Tester",  -- xev.
-               "Color picker"
+               "Event Tester",
+               "Color Picker",
             },
          },
 
@@ -24,9 +24,8 @@ awful.rules.rules = gears.table.join(
       {
          rule_any = {
             class = {
-               "URxvt",
-               "Emacs",
-               "Firefox",
+               "urxvt", "URxvt",
+               "emacs", "Emacs",
             },
          },
          properties = { size_hints_honor = false }
