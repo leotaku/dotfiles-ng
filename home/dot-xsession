@@ -8,6 +8,9 @@ source "$HOME"/.config/user-dirs.sh
 xrdb -merge "$HOME/.config/Xresources"
 xrdb -merge "$HOME/.config/XresourcesColors"
 
+# Load Xkeyboard
+xkbcomp $HOME/.config/custom.xkb $DISPLAY
+
 # Systemd setup
 systemctl --user import-environment
 
