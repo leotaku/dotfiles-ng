@@ -13,3 +13,6 @@ ff = "only"
 
 [core]
 askpass =
+
+[init]
+defaultBranch = master
