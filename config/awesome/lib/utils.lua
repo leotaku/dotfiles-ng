@@ -12,6 +12,32 @@ end
 
 local cmd = {}
 
+function cmd.inc_layout(i)
+   local ln = awful.layout.getname()
+   local s = awful.screen.focused()
+
+   if ln ~= "max" then
+      awful.layout.inc(i, s)
+   end
+end
+
+function cmd.toggle_tag_max()
+   local ln = awful.layout.getname()
+   local c = mouse.current_client
+   if c == nil then
+      return
+   end
+
+   c.fullscreen = false
+   if ln == "max" then
+      awful.layout.inc(1)
+      awful.layout.remove_default_layout(awful.layout.suit.max)
+   else
+      awful.layout.append_default_layout(awful.layout.suit.max)
+      awful.layout.set(awful.layout.suit.max)
+   end
+end
+
 function cmd.toggle_fullscreen(c)
    c.fullscreen = not c.fullscreen
    c:raise()
@@ -29,11 +55,6 @@ end
 
 function cmd.prompt()
    awful.screen.focused().mypromptbox:run()
-end
-
-function cmd.inc_layout(i)
-   local s = awful.screen.focused()
-   awful.layout.inc(i, s)
 end
 
 -- Exports

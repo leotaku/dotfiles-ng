@@ -18,6 +18,7 @@ local globalkeys = relief.keys.bindkeys(
    {"M-space", cmd.inc_layout, 1},
    {"M-Tab", awful.client.focus.byidx, 1},
    -- Layout
+   {"M-m", cmd.toggle_tag_max},
    -- Directional focus
    {"M-h", awful.client.focus.bydirection, "left"},
    {"M-j", awful.client.focus.bydirection, "down"},
@@ -38,8 +39,7 @@ local globalkeys = relief.keys.bindkeys(
 local clientkeys = relief.keys.bindkeys(
    {},
    {"M-x", relief.method2curry("kill"), "self"},
-   {"M-f", cmd.toggle_max, "self"},
-   {"M-m", cmd.toggle_fullscreen, "self"},
+   {"M-f", cmd.toggle_fullscreen, "self"},
    {"M-n", cmd.toggle_float, "self"},
    {"M-s", awful.placement.centered, "self"}
 )
