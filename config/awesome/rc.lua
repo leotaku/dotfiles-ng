@@ -177,3 +177,8 @@ client.connect_signal(
       end
    end
 )
+
+-- Signal function to execute when the screen configuration changes.
+screen.connect_signal("added", awesome.restart)
+screen.connect_signal("removed", awesome.restart)
+
