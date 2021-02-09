@@ -2,14 +2,14 @@
 WantedBy=default.target
 
 [Service]
-Type=forking
+Type=simple
 Environment=DISPLAY=:0
-ExecStart=/usr/bin/env xcape -e "ISO_Level3_Shift=Escape"
+ExecStart=/usr/bin/env xcape -f -e "ISO_Level3_Shift=Escape"
 Restart=always
 RestartSec=1
 
 [Unit]
-After=graphical-session-pre.target
+After=graphical-session.target
 Description=Xcape custom key bindings
 Documentation=man:xcape(1)
 PartOf=graphical-session.target
