@@ -51,7 +51,7 @@ require("theming.bar")
 require("widget.notification_center")
 
 -- Set wallpaper
-_G.wallpaper = os.getenv("HOME") .. "/.wallpaper.jpg"
+_G.wallpaper = "wallpaper.jpg"
 require("theming.wallpaper")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.

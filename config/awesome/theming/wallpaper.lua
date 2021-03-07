@@ -11,7 +11,22 @@ local awful = require("awful")
 local gears = require("gears")
 
 -- Code
-local wallpaper = _G.wallpaper
+local function find_wallpaper(relative)
+   for _, parent in ipairs({
+         os.getenv("HOME") .. "/.config/awesome",
+         os.getenv("HOME") .. "/.config",
+         os.getenv("HOME"),
+   }) do
+      local path = parent .. "/" .. relative
+      local f = io.open(path, "r")
+      if f then
+         io.close(f)
+         return path
+      end
+   end
+end
+
+local wallpaper = find_wallpaper(_G.wallpaper)
 
 local function set_wallpaper(s)
    if wallpaper then
