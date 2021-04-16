@@ -6,7 +6,7 @@ function fish_vi_cursor
     echo -en "\033[6 q"
 end
 
-function fish_vi_cursor_handle --on-variable fish_bind_mode --on-event fish_focus_in --on-event fish_prompt_fixed
+function fish_vi_cursor_handle --on-variable fish_bind_mode --on-event fish_focus_in --on-event fish_prompt_done
     if test $fish_bind_mode = "insert"
         echo -en "\033[6 q"
     else if test $fish_bind_mode = "default"
