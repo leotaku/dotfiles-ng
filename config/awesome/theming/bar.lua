@@ -81,10 +81,10 @@ local light_slider = create_slider {
    color = beautiful.yellow,
    background_color = beautiful.darkyellow,
    value = 0,
-   maximum = 1000,
+   maximum = 100,
    minimum = 1,
    callback = function (value)
-      awful.spawn("light -S "..value/10)
+      awful.spawn("light -S "..value)
    end
 }
 
@@ -92,10 +92,10 @@ local pulse_slider = create_slider {
    color = beautiful.darkred,
    background_color = beautiful.red,
    value = 0,
-   maximum = 15000,
+   maximum = 100,
    minimum = 0,
    callback = function (value)
-      awful.spawn("pactl set-sink-volume 0 0x"..value)
+      awful.spawn("pamixer --set-volume "..value)
    end
 }
 
