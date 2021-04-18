@@ -1,0 +1,12 @@
+[Install]
+WantedBy=default.target
+
+[Service]
+ExecStart=/usr/bin/env tmux -D
+Restart=on-failure
+
+[Unit]
+After=basic.target
+Description=Tmux: terminal multiplexer
+Documentation=man:tmux(1) https://tmux.github.io/
+X-RestartIfChanged=false
