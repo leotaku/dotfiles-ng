@@ -26,7 +26,7 @@ bind -M insert  \e\[1\;5A true
 
 # Autojump setup
 if type -q z
-    set -x _ZL_DATA       '~/.config/zsh/.zlua'
+    set -x _ZL_DATA       '~/.local/share/zlua_db'
     set -x _ZL_ADD_ONCE   1
     set -x _ZL_MATCH_MODE 1
     set -x _ZL_HYPHEN     1
