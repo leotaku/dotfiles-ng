@@ -30,7 +30,7 @@ if type -q z
     set -x _ZL_ADD_ONCE   1
     set -x _ZL_MATCH_MODE 1
     set -x _ZL_HYPHEN     1
-    source (z --init fish fzf | psub)
+    source (z --init fish | psub)
     alias j z
 end
 
