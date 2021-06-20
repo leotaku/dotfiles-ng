@@ -1,11 +1,12 @@
-[Unit]
-Description=Lorri Daemon
-Requires=lorri.socket
-After=lorri.socket
-
 [Service]
 ExecStart=/usr/bin/env lorri daemon
 PrivateTmp=true
 ProtectSystem=strict
 ProtectHome=read-only
 Restart=on-failure
+
+[Unit]
+Requires=lorri.socket
+After=lorri.socket
+Description=Lorri Daemon
+Documentation=man:lorri(1)
