@@ -7,5 +7,5 @@ Restart=on-failure
 
 [Unit]
 After=graphical-session.target
-Description=Srandrd and Autorandr - Multiple monitor handling
+Description=Srandrd and Autorandr: Multiple monitor handling
 Documentation=man:srandrd(1) man:autorandr(1)

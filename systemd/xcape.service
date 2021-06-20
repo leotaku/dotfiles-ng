@@ -9,6 +9,6 @@ RestartSec=1
 
 [Unit]
 After=graphical-session.target
-Description=Xcape custom key bindings
+Description=Xcape: Custom X11 key bindings
 Documentation=man:xcape(1)
 PartOf=graphical-session.target

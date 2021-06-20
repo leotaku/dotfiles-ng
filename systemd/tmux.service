@@ -7,6 +7,6 @@ Restart=on-failure
 
 [Unit]
 After=basic.target
-Description=Tmux: terminal multiplexer
+Description=Tmux: Terminal multiplexer
 Documentation=man:tmux(1) https://tmux.github.io/
 X-RestartIfChanged=false

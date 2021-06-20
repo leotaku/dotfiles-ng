@@ -9,5 +9,5 @@ SuccessExitStatus=3 4
 
 [Unit]
 After=network.target
-Description=Syncthing - Open Source Continuous File Synchronization
+Description=Syncthing: Open Source Continuous File Synchronization
 Documentation=man:syncthing(1)
