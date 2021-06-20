@@ -173,7 +173,7 @@ local function create(s)
    awful.placement.top_right(
       cal_popup,
       {
-         margins = { top = dpi(22), right = 0},
+         margins = { top = dpi(20), right = 0 },
          parent = awful.screen.focused()
       }
    )
@@ -184,7 +184,7 @@ local function create(s)
          awful.placement.top_right(
             cal_popup,
             {
-               margins = { top = dpi(22), right = 0},
+               margins = { top = dpi(20), right = 0 },
                parent = awful.screen.focused()
             }
          )
