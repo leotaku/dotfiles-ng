@@ -1,0 +1,12 @@
+[Install]
+WantedBy=default.target
+
+[Service]
+ExecStart=/usr/bin/env blueman-applet
+Restart=always
+
+[Unit]
+After=basic.target
+Before=graphical.target
+Description=Blueman-Applet: A tray applet for managing bluetooth
+Documentation=man:blueman-applet(1)
