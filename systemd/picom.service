@@ -1,5 +1,5 @@
 [Install]
-WantedBy=graphical-session.target
+WantedBy=default.target
 
 [Service]
 ExecStart=/usr/bin/env picom --experimental-backends
