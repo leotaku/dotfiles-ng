@@ -9,4 +9,5 @@ RestartSec=3
 [Unit]
 After=graphical-session-pre.target
 Description=Picom: X11 compositor
+Documentation=man:picom(1)
 PartOf=graphical-session.target
