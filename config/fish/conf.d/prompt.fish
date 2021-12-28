@@ -50,3 +50,8 @@ end
 bind -M insert \cl fish_prompt_clear
 bind -M visual \cl fish_prompt_clear
 bind \cl fish_prompt_clear
+
+bind -M insert \r fish_prompt_execute
+bind -M insert \n fish_prompt_execute
+bind -m insert \n fish_prompt_execute
+bind -m insert \r fish_prompt_execute
