@@ -1,7 +1,7 @@
 # dotfiles
 
 + `config` :: directory for configurations
-  + `fish` :: fish shell
+  + `zsh` :: zsh shell
   + `tmux/tmux.conf` :: tmux terminal multiplexer
 + `Justfile` :: task-runner stow commands
 

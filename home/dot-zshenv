@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
+export HISTFILE="$HOME/.local/share/zsh_history"
+export HISTSIZE=100000
+export SAVEHIST=100000
