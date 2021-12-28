@@ -23,6 +23,7 @@ bind -M insert  \e\[1\;5D backward-word
 bind -M insert  \e\[1\;5C forward-word
 bind -M insert  \e\[1\;5B true
 bind -M insert  \e\[1\;5A true
+bind -M insert  \e\[2~ true
 
 # Autojump setup
 if type -q z
