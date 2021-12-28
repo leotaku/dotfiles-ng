@@ -15,7 +15,7 @@ function fish_gen_prompt
 
     switch "$prompt_status$IN_NIX_SHELL"
         case "0?*"
-            set_color blue --bold
+            set_color green --bold
         case "??*"
             set_color purple --bold
         case "0"
@@ -24,7 +24,7 @@ function fish_gen_prompt
             set_color red --bold
     end
 
-    echo -en ">"(set_color normal)" "
+    echo -en "%"(set_color normal)" "
 end
 
 function fish_prompt_preexec --on-event fish_prompt
