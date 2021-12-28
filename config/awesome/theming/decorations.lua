@@ -58,20 +58,6 @@ client.connect_signal(
 )
 
 client.connect_signal(
-   "unfocus",
-   function(c)
-      c.border_color = beautiful.white
-   end
-)
-
-client.connect_signal(
-   "focus",
-   function(c)
-      c.border_color = beautiful.white
-   end
-)
-
-client.connect_signal(
    "property::maximized",
    function(c)
       if c.maximized then
