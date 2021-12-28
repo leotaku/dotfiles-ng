@@ -27,8 +27,10 @@ function fish_gen_prompt
     echo -en "%"(set_color normal)" "
 end
 
-function fish_prompt_preexec --on-event fish_prompt
+function fish_prompt_execute
     fish_prompt_hide_cursor
+    sh -c 'sleep 0.1 && echo -en "\033[?25h"' &
+    commandline -f execute
 end
 
 function fish_prompt_hide_cursor
