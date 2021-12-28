@@ -24,7 +24,7 @@ awful.rules.rules = gears.table.join(
       {
          rule_any = {
             class = {
-               "urxvt", "URxvt",
+               "kitty", "Kitty",
                "emacs", "Emacs",
             },
          },
