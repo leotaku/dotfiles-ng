@@ -1,5 +1,3 @@
-# local creset="$(printf %b "$terminfo[civis]\e[6 q")"
-# RPS1="${RPS1}%{$creset%}"
 KEYTIMEOUT=1
 
 bindkey -v '^?' backward-delete-char

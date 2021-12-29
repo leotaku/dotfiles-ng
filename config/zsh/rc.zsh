@@ -45,8 +45,6 @@ typeset -gA K=(
     'Backspace'   "^?"
     'C-Backspace' "^H"
 )
-# 'Backtab'   "$terminfo[kbct]"
-# 'Backspace' "$terminfo[kbs]"
 
 # Function keys
 for f in {1..12}; do
@@ -73,23 +71,12 @@ bindkey "$K[Insert]" ignore
 bindkey "$K[Delete]" delete-char
 bindkey "$K[End]" end-of-line
 
-# bindkey "^[[5;5~" ignore # C-PgUp
-# bindkey "^[[6;5~" ignore # C-PgDown
-# bindkey "^[[5;2~" ignore # S-PgUp
-# bindkey "^[[6;2~" ignore # S-PgDown
-
-# bindkey "^[[1;2A" ignore
-# bindkey "^[[1;2B" ignore
-# bindkey "^[[1;2C" ignore
-# bindkey "^[[1;2D" ignore
-
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' insert-tab false
 zstyle ':completion:*' menu select
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path "$HOME/.cache/zcompcache"
-#zstyle ':completion:*' list-prompt   'a'
-#zstyle ':completion:*' select-prompt 'a'
+
 autoload -Uz compinit
 autoload -Uz bashcompinit && bashcompinit
 compinit -d "$DUMPFILE"
