@@ -17,4 +17,9 @@ function _nix() {
     _describe 'nix' suggestions
 }
 
+function _nix_color_hook() {
+    psvar[1]="$IN_NIX_SHELL"
+}
+add-zsh-hook precmd _nix_color_hook
+
 compdef _nix nix
