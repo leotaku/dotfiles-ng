@@ -95,7 +95,7 @@ local pulse_slider = create_slider {
    maximum = 100,
    minimum = 0,
    callback = function (value)
-      awful.spawn("pamixer --set-volume "..value)
+      awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ "..value.."%")
    end
 }
 
