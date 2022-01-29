@@ -99,7 +99,6 @@ plug() {
 
 plug nix.zsh
 plug vi.zsh
-plug git.fish
 plug direnv.zsh
 plug zlua.zsh
 
