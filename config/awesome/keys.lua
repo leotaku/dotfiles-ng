@@ -32,6 +32,9 @@ local globalkeys = relief.keys.bindkeys(
    -- Spawn apps
    {"M-Return", awful.spawn, _G.terminal or "xterm"},
    {"M-d", awful.spawn, "rofi -show drun"},
+   {"F12", awful.spawn, "sh -c 'maim -us | xclip -selection clipboard -t image/png'"},
+   {"F11", awful.spawn, "sh -c 'maim -us | tesseract - - | sed -z \"s/..$//\" | xclip -selection clipboard'"},
+   {"F10", awful.spawn, "sh -c 'maim -us | zbarimg - | xclip -selection clipboard'"},
    -- AwesomeWM
    {"F9", awesome.restart}
 )
