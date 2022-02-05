@@ -88,12 +88,17 @@ alias diff='diff --color=auto'
 alias nix="SHELL=zsh command nix"
 
 plug() {
-    local conf="${ZDOTDIR:-$HOME}/conf.d"
+    local zconf="${ZDOTDIR:-$HOME}/conf.d"
+    local zcache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
     local name="$1"
-    if [[ -f "$conf/$name" ]]; then
-        source "$conf/$name"
+    if [[ -f "$zconf/$name" ]]; then
+        source "$zconf/$name"
     else
-        source "$conf/$name/$name.plugin.zsh"
+        if [[ ! -d "$zcache/$name" ]]; then
+            mkdir -p "$zcache"
+            git clone git@github.com:zsh-users/"$name".git "$zcache/$name"
+        fi
+        source "$zcache/$name/$name.plugin.zsh"
     fi
 }
 
