@@ -28,6 +28,21 @@ local function set_mouse(c)
    end
 end
 
+local inhibit_change_signals = true
+
+client.connect_signal(
+   "manage",
+   function (c)
+      inhibit_change_signals = true
+      gears.timer.delayed_call(
+         function ()
+            inhibit_change_signals = false
+         end
+      )
+   end
+)
+
+
 client.connect_signal(
    "focus",
    function (c)
@@ -39,11 +54,13 @@ client.connect_signal(
 )
 
 client.connect_signal(
-   "manage",
-   function (c)
+   "swapped",
+   function(c, C)
+      if inhibit_change_signals then
+         return
+      end
+
       set_mouse(mouse.current_client)
-      c.rel_x = 0.5
-      c.rel_y = 0.5
       move_mouse(c)
    end
 )
@@ -51,7 +68,11 @@ client.connect_signal(
 client.connect_signal(
    "property::floating",
    function(c)
-      set_mouse(c)
+      if inhibit_change_signals then
+         return
+      end
+
+      set_mouse(mouse.current_client)
       move_mouse(c)
    end
 )
