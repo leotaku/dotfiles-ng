@@ -6,16 +6,14 @@ bindkey -a '^[' vi-insert
 
 function _vi_reset_cursor() {
     printf %b "\e[6 q"
-    printf %b "$terminfo[cnorm]"
 }
-add-zsh-hook precmd _vi_reset_cursor
+zle -N zle-line-init _vi_reset_cursor
 
-function vi-accept-line() {
-    # printf %b "$terminfo[civis]"
-    printf %b "\e[2 q"
+function _vi_accept_line() {
     zle accept-line
+    printf %b "\e[2 q"
 }
-zle -N vi-accept-line
+zle -N vi-accept-line _vi_accept_line
 
 function _vi_set_cursor() {
     if [[ "$KEYMAP" == "main" ]]; then
