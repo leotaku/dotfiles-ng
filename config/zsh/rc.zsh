@@ -12,7 +12,7 @@ WORDCHARS='*?_~=&;!$%^:'
 select-word-style normal
 
 setopt extendedglob promptsubst
-PS1='${${PWD/$HOME/~}//(#b)([^\/.])[^\/]#\//$match[1]/}%B%(?.%F{yellow}.%F{red})%(1V.%F{green}.)%%%f%b '
+PS1='${${PWD/$HOME/~}//(#b)([^\/.])[^\/]#\//$match[1]/}%B%(?.%(1V.%F{green}.%F{yellow}).%F{red})%%%f%b '
 RPS1=''
 
 zmodload zsh/complist
