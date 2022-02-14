@@ -13,11 +13,13 @@ end
 local cmd = {}
 
 function cmd.inc_layout(i)
-   local ln = awful.layout.getname()
    local s = awful.screen.focused()
+   awful.layout.inc(i, s)
+end
 
-   if ln ~= "max" then
-      awful.layout.inc(i, s)
+function cmd.inc_client(i)
+   if not client.focus.fullscreen then
+      awful.client.focus.byidx(i)
    end
 end
 
