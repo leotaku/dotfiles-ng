@@ -107,14 +107,14 @@ plug vi.zsh
 plug direnv.zsh
 plug zlua.zsh
 
-bindkey "$K[Up]"   history-substring-search-up
-bindkey "$K[Down]" history-substring-search-down
-
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="fg=magenta,standout"
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND="fg=red,standout"
+
+bindkey "$K[Up]" history-substring-search-up
+bindkey "$K[Down]" history-substring-search-down
 
 plug zsh-autosuggestions
 plug zsh-history-substring-search
