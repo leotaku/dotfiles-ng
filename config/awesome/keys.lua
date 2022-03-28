@@ -17,6 +17,7 @@ local globalkeys = relief.keys.bindkeys(
    -- Focus
    {"M-space", cmd.inc_layout, 1},
    {"M-Tab", cmd.inc_client, 1},
+   {"M-o", cmd.inc_client, 1},
    -- Layout
    {"M-m", cmd.toggle_tag_max},
    -- Directional focus
