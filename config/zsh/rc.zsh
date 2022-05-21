@@ -86,6 +86,7 @@ complete -o nospace -C "/usr/bin/env terraform" terraform
 alias ls='LC_COLLATE=C ls --color=tty --group-directories-first'
 alias diff='diff --color=auto'
 alias nix='SHELL=zsh command nix'
+alias gst='git status'
 
 plug() {
     local zconf="${ZDOTDIR:-$HOME}/conf.d"
