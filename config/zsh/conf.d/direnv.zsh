@@ -1,19 +1,23 @@
 if type direnv&>/dev/null; then
+    direnv() {
+        export DIRENV_DIR="-"
+        command direnv "$@"
+    }
+
     _direnv_precmd_hook() {
         if [[ -z "$DIRENV_DIR" ]]; then
+            return
+        elif [[ "$DIRENV_DIR" == "-$PWD" ]]; then
             return
         fi
         _direnv_generic_hook
     }
     _direnv_generic_hook() {
-        if [[ "$_DIRENV_PWD" != "$PWD" ]]; then
-            _DIRENV_PWD="$PWD"
-        else
-            return
-        fi
         local code="$(DIRENV_LOG_FORMAT="" direnv export zsh)"
         if [[ -n "$code" ]]; then
             eval "$code"
+        else
+            DIRENV_DIR=""
         fi
     }
 
