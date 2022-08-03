@@ -8,7 +8,6 @@ x-scheme-handler/https=firefox.desktop
 
 [Default Applications]
 application/pdf=org.pwmt.zathura.desktop
-application/vnd.openxmlformats-officedocument.wordprocessingml.document=writer.desktop
 application/x-shellscript=emacs.desktop
 image/bmp=sxiv.desktop
 image/gif=sxiv.desktop
