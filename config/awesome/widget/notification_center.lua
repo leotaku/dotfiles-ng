@@ -1,7 +1,5 @@
 local wibox = require("wibox")
-local log = require("lib.log")
 local dpi = require("beautiful").xresources.apply_dpi
-local inspect = require("lib.inspect")
 
 local notif_wb = wibox {
    visible = true,
