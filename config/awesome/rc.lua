@@ -36,8 +36,7 @@ require("awful.hotkeys_popup.keys")
 require("awful.autofocus")
 
 -- Load keys
-local keys = require("keys")
-local globalkeys = keys.globalkeys
+require("keys")
 
 -- Load behaviors
 require("behavior.rules")
@@ -93,27 +92,28 @@ for I=1,screen.count() do
          }
       )
 
-      globalkeys = gears.table.join(
-         globalkeys,
-         -- View tag only.
-         awful.key({ modkey }, "#" .. (offset + i),
-            function ()
-               if this_screen ~= mouse.screen then
-                  awful.screen.focus(this_screen)
-               end
-               tag:view_only()
-            end,
-            { description = "view tag #"..i, group = "tag" }
-         ),
-         -- Move client to tag.
-         awful.key({ modkey, "Shift" }, "#" .. (offset + i),
-            function ()
-               if client.focus then
-                  client.focus:move_to_tag(tag)
-               end
-            end,
-            { description = "move focused client to tag #"..i, group = "tag" }
-         )
+      awful.keyboard.append_global_keybindings(
+         {
+            -- View tag only.
+            awful.key({ _G.modkey }, "#" .. (offset + i),
+               function ()
+                  if this_screen ~= mouse.screen then
+                     awful.screen.focus(this_screen)
+                  end
+                  tag:view_only()
+               end,
+               { description = "view tag #"..i, group = "tag" }
+            ),
+            -- Move client to tag.
+            awful.key({ _G.modkey, "Shift" }, "#" .. (offset + i),
+               function ()
+                  if client.focus then
+                     client.focus:move_to_tag(tag)
+                  end
+               end,
+               { description = "move focused client to tag #"..i, group = "tag" }
+            )
+         }
       )
    end
 end
@@ -138,8 +138,6 @@ awful.rules.rules = gears.table.join(
             border_color = beautiful.border_normal,
             focus = awful.client.focus.filter,
             raise = true,
-            keys = keys.clientkeys,
-            buttons = keys.clientbuttons,
             screen = awful.screen.preferred,
             placement = awful.placement.no_overlap+awful.placement.no_offscreen,
          }
@@ -151,9 +149,6 @@ awful.rules.rules = gears.table.join(
 
    }
 )
-
--- Set keys
-root.keys(globalkeys)
 
 -- Signal function to execute when a new client appears.
 client.connect_signal(
