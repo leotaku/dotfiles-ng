@@ -24,7 +24,7 @@ local menubar = require("menubar")
 -- Global variables
 _G.terminal = os.getenv("TERMINAL") .. " -e tmux"
 _G.editor = os.getenv("EDITOR") or "nano"
-_G.editor_cmd = terminal .. " -e " .. editor
+_G.editor_cmd = _G.terminal .. " -e " .. _G.editor
 
 -- Enable default awful configuration
 require("awful.hotkeys_popup.keys")
@@ -69,7 +69,7 @@ awful.layout.layouts = {
 }
 
 -- Menubar configuration
-menubar.utils.terminal = terminal
+menubar.utils.terminal = _G.terminal
 
 local names = { "1", "2", "3", "4", "5", "6" }
 local offsets = { 23, 9 }
