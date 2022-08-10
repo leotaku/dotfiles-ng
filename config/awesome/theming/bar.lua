@@ -166,7 +166,7 @@ local function create(s)
    local cal_popup = awful.popup {
       ontop = true,
       visible = false,
-      preferred_positions = top,
+      preferred_positions = "top",
       widget = calendar_widget
    }
 
@@ -242,7 +242,6 @@ local function create(s)
             },
             -- End section
             {
-               mybattery,
                {
                   {
                      widget = wibox.widget.systray
@@ -252,7 +251,6 @@ local function create(s)
                   layout = wibox.container.margin
                },
                mytextclock,
-               mymail,
                spacing = dpi(10),
                spacing_widget = {
                   markup = "|",
