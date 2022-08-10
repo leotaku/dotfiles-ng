@@ -151,7 +151,6 @@ local function create(s)
    local mypromptbox = awful.widget.prompt {
       prompt = 'Execute: '
    }
-   local mylayoutbox = awful.widget.layoutbox(s)
    local mytaglist = awful.widget.taglist {
       screen = s,
       filter  = awful.widget.taglist.filter.all,

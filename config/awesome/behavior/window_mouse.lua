@@ -41,7 +41,7 @@ end
 
 client.connect_signal(
    "request::manage",
-   function (this)
+   function ()
       inhibit_change_signals = true
       gears.timer.delayed_call(
          function ()
