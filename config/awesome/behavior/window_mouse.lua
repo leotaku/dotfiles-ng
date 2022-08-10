@@ -54,10 +54,10 @@ client.connect_signal(
 
 client.connect_signal(
    "focus",
-   function (this)
-      if not (this == mouse.current_client) then
+   function (self)
+      if not (self == mouse.current_client) then
          set_mouse(mouse.current_client)
-         move_mouse(this)
+         move_mouse(self)
       end
    end
 )
