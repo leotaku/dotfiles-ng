@@ -2,7 +2,7 @@
 -- This has been taken from the default rc.lua file provided by AwesomeWM
 
 -- Imports
-naughty = require("naughty")
+local naughty = require("naughty")
 
 -- Code
 

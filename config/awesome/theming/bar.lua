@@ -9,6 +9,7 @@
 
 -- Imports
 local awful = require("awful")
+local gears = require("gears")
 local beautiful = require("beautiful")
 local wibox = require("wibox")
 local utils = require("lib.utils")
@@ -140,9 +141,8 @@ gears.timer {
     call_now  = true,
     autostart = true,
     callback  = function()
-       now = tonumber(read_file("/sys/class/power_supply/BAT0/energy_now"))
-       full = tonumber(read_file("/sys/class/power_supply/BAT0/energy_full"))
-
+       local now = tonumber(read_file("/sys/class/power_supply/BAT0/energy_now"))
+       local full = tonumber(read_file("/sys/class/power_supply/BAT0/energy_full"))
        battery_slider.value = math.floor(1000 * now/full)
     end
 }

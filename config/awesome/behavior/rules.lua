@@ -1,8 +1,8 @@
 -- Rules for awesomewm clients
 
 -- Imports
-awful = require("awful")
-gears = require("gears")
+local awful = require("awful")
+local gears = require("gears")
 
 -- Code
 awful.rules.rules = gears.table.join(

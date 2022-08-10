@@ -9,14 +9,14 @@
 -- Art by Joan G. Stark
 
 -- Imports
-beautiful = require("beautiful")
-wibox     = require("wibox")
+local awful = require("awful")
+local beautiful = require("beautiful")
 
 -- Locals
 local dpi = beautiful.xresources.apply_dpi
 
 -- Code
-function handle_float(c)
+local function handle_float(c)
    if c.floating then
       awful.titlebar(
          c,
