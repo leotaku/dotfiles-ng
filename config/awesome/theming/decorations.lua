@@ -40,23 +40,6 @@ local function handle_float(c)
    end
 end
 
-
-client.connect_signal(
-   "manage",
-   function(c)
-      local bar = awful.titlebar(
-         c,
-         {
-            size      = dpi(5),
-            position  = "left",
-            bg_focus  = beautiful.blue,
-            bg_normal = beautiful.black,
-         }
-      )
-      handle_float(c)
-   end
-)
-
 client.connect_signal(
    "property::maximized",
    function(c)
