@@ -15,6 +15,16 @@ ruled.client.append_rules {
       },
       properties = { floating = true },
    },
+   -- Force some applications to tile
+   {
+      rule_any = {
+         class = {
+            "firefox", "Firefox",
+            "blender", "Blender",
+         },
+      },
+      properties = { maximized = false, floating = false },
+   },
    -- Ignore size hints for most windows
    {
       rule_any = {
