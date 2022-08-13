@@ -56,6 +56,7 @@ awful.keyboard.append_global_keybindings(
       -- Spawn apps
       awful.key({ _G.modkey }, "Return", function () awful.spawn(_G.terminal or "xterm") end),
       awful.key({ _G.modkey }, "d", function () awful.spawn("rofi -show drun") end),
+      -- Screenshot
       awful.key({ _G.modkey }, "F12", function ()
             awful.spawn("sh -c 'maim -us | xclip -selection clipboard -t image/png'")
       end),
