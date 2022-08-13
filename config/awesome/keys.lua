@@ -56,17 +56,17 @@ awful.keyboard.append_global_keybindings(
       -- Spawn apps
       awful.key({ _G.modkey }, "Return", function () awful.spawn(_G.terminal or "xterm") end),
       awful.key({ _G.modkey }, "d", function () awful.spawn("rofi -show drun") end),
-      awful.key({}, "F12", function ()
+      awful.key({ _G.modkey }, "F12", function ()
             awful.spawn("sh -c 'maim -us | xclip -selection clipboard -t image/png'")
       end),
-      awful.key({}, "F11", function ()
+      awful.key({ _G.modkey }, "F11", function ()
             awful.spawn("sh -c 'maim -us | tesseract - - | sed -z \"s/..$//\" | xclip -selection clipboard'")
       end),
-      awful.key({}, "F10", function ()
+      awful.key({ _G.modkey }, "F10", function ()
             awful.spawn("sh -c 'maim -us | zbarimg - | xclip -selection clipboard'")
       end),
       -- AwesomeWM
-      awful.key({}, "F9", awesome.restart),
+      awful.key({ _G.modkey }, "F9", awesome.restart),
    }
 )
 
