@@ -4,40 +4,49 @@
 local gears = require("gears")
 
 -- Code
-local function move_mouse(this)
+local function move_mouse(self, fixed)
    gears.timer.delayed_call(
       function ()
-         if this.valid then
-            mouse.coords (
-               {
-                  x = this.x + this.width  * (this.rel_x or 0.5),
-                  y = this.y + this.height * (this.rel_y or 0.5),
-               },
-               true
-            )
+         if self and self.valid then
+            self.allow_record = true
+            if not self.rel_x or (self.rel_x <= 0 or self.rel_x >= 1) then
+               self.rel_x = 0.5
+            end
+            if not self.rel_y or (self.rel_y <= 0 or self.rel_y >= 1) then
+               self.rel_y = 0.5
+            end
+            if fixed then
+               mouse.coords (
+                  {
+                     x = self.x + self.width  * 0.5,
+                     y = self.y + self.height * 0.5,
+                  },
+                  true
+               )
+            else
+               mouse.coords (
+                  {
+                     x = self.x + self.width  * self.rel_x,
+                     y = self.y + self.height * self.rel_y,
+                  },
+                  true
+               )
+            end
          end
       end
-   )
+)
 end
 
-local function set_mouse(this)
-   if this then
+local function set_mouse(self)
+   if self and self.valid and self.allow_record then
       local mouse = mouse.coords()
-      this.rel_x = (mouse.x - this.x) / this.width
-      this.rel_y = (mouse.y - this.y) / this.height
+      self.rel_x = (mouse.x - self.x) / self.width
+      self.rel_y = (mouse.y - self.y) / self.height
+      self.allow_record = false
    end
 end
 
 local inhibit_change_signals = true
-
-local function handle_change_signal(this)
-   if inhibit_change_signals then
-      return
-   end
-
-   set_mouse(mouse.current_client)
-   move_mouse(this)
-end
 
 client.connect_signal(
    "request::manage",
@@ -51,10 +60,10 @@ client.connect_signal(
    end
 )
 
-
 client.connect_signal(
-   "focus",
+   "request::activate",
    function (self)
+      if inhibit_change_signals then return end
       if not (self == mouse.current_client) then
          set_mouse(mouse.current_client)
          move_mouse(self)
@@ -62,7 +71,43 @@ client.connect_signal(
    end
 )
 
-client.connect_signal("swapped", handle_change_signal)
-client.connect_signal("property::floating", handle_change_signal)
-client.connect_signal("property::fullscreen", handle_change_signal)
-client.connect_signal("property::maximized", handle_change_signal)
+client.connect_signal(
+   "swapped",
+   function (self)
+      if inhibit_change_signals then return end
+      set_mouse(mouse.current_client)
+      move_mouse(self)
+   end
+)
+client.connect_signal(
+   "property::floating",
+   function (self)
+      if inhibit_change_signals then return end
+      set_mouse(mouse.current_client)
+      move_mouse(self)
+   end
+)
+client.connect_signal(
+   "property::fullscreen",
+   function (self)
+      if inhibit_change_signals then return end
+      set_mouse(mouse.current_client)
+      move_mouse(self, true)
+   end
+)
+client.connect_signal(
+   "property::maximized",
+   function (self)
+      if inhibit_change_signals then return end
+      set_mouse(mouse.current_client)
+      move_mouse(self)
+   end
+)
+tag.connect_signal(
+   "property::layout",
+   function ()
+      if inhibit_change_signals then return end
+      set_mouse(mouse.current_client)
+      move_mouse(mouse.current_client)
+   end
+)
