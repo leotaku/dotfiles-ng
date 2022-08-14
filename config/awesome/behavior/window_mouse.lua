@@ -8,7 +8,6 @@ local function move_mouse(self, fixed)
    gears.timer.delayed_call(
       function ()
          if self and self.valid then
-            self.allow_record = true
             if not self.rel_x or (self.rel_x <= 0 or self.rel_x >= 1) then
                self.rel_x = 0.5
             end
@@ -38,11 +37,10 @@ local function move_mouse(self, fixed)
 end
 
 local function set_mouse(self)
-   if self and self.valid and self.allow_record then
+   if self and self.valid then
       local mouse = mouse.coords()
       self.rel_x = (mouse.x - self.x) / self.width
       self.rel_y = (mouse.y - self.y) / self.height
-      self.allow_record = false
    end
 end
 
