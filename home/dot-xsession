@@ -1,5 +1,6 @@
 # Environment
 export TERMINAL="kitty"
+export BROWSER="firefox-devedition"
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export QT_AUTO_SCREEN_SCALE_FACTOR="0"
 source "$HOME"/.config/user-dirs.sh
