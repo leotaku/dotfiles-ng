@@ -3,7 +3,7 @@ WantedBy=default.target
 
 [Service]
 ExecStart=/usr/bin/env tmux -D
-Restart=on-failure
+Restart=no
 
 [Unit]
 After=basic.target
