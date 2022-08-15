@@ -1,12 +1,12 @@
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target
 
 [Service]
 ExecStart=/usr/bin/env sh ./.config/systemd/user/redshift.sh
-Restart=always
+Restart=no
 
 [Unit]
-After=basic.target
-Before=graphical.target
+PartOf=graphical-session.target
+After=graphical-session.target
 Description=Redshift: Screen color temperature manager
 Documentation=man:redshift(1)

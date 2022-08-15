@@ -1,11 +1,12 @@
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target
 
 [Service]
 ExecStart=/usr/bin/env kdeconnect-indicator
-Restart=always
+Restart=no
 
 [Unit]
+PartOf=graphical-session.target
 After=graphical-session.target
 Description=KDEConnect: Phone integration for Linux
 Documentation=https://kdeconnect.kde.org/

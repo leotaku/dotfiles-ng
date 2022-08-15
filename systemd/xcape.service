@@ -1,12 +1,12 @@
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target
 
 [Service]
 ExecStart=/usr/bin/env xcape -f -e "ISO_Level3_Shift=Escape"
-Restart=always
-RestartSec=1
+Restart=no
 
 [Unit]
+PartOf=graphical-session.target
 After=graphical-session.target
 Description=Xcape: Custom X11 key bindings
 Documentation=man:xcape(1)

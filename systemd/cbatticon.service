@@ -1,12 +1,12 @@
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target
 
 [Service]
 ExecStart=/usr/bin/env cbatticon
-Restart=always
+Restart=no
 
 [Unit]
-After=basic.target
-Before=graphical.target
+PartOf=graphical-session.target
+After=graphical-session.target
 Description=Cbatticon: A system tray battery icon
 Documentation=man:cbatticon(1)
