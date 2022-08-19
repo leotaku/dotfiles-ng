@@ -13,6 +13,4 @@ xkbcomp $HOME/.config/custom.xkb $DISPLAY
 
 # Systemd setup
 systemctl --user import-environment
-
-# Window manager
-awesome
+systemctl --user start --wait graphical-session.target
