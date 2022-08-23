@@ -21,6 +21,7 @@ ruled.client.append_rules {
          class = {
             "firefox", "Firefox",
             "blender", "Blender",
+            "chromium-browser", "Chromium-browser",
          },
       },
       properties = { maximized = false, floating = false },
