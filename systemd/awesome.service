@@ -6,7 +6,6 @@ ExecStart=/usr/bin/env awesome
 Restart=no
 
 [Unit]
-BindsTo=graphical-session.target
-PartOf=graphical-session.target
+Before=graphical-session.target
 Description=Awesome: Window manager
 Documentation=man:awesome(1)
