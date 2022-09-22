@@ -10,4 +10,3 @@ PartOf=graphical-session.target
 After=graphical-session.target
 Description=Xcape: Custom X11 key bindings
 Documentation=man:xcape(1)
-PartOf=graphical-session.target
