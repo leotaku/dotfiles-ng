@@ -13,4 +13,5 @@ xkbcomp $HOME/.config/custom.xkb $DISPLAY
 
 # Systemd setup
 systemctl --user import-environment
-systemctl --user start --wait graphical-session.target
+systemctl --user start default-fake.target
+systemctl --user start --wait graphical-session-fake.target

@@ -1,12 +1,12 @@
 [Install]
-WantedBy=graphical-session.target
+WantedBy=graphical-session-fake.target
 
 [Service]
 ExecStart=/usr/bin/env picom --experimental-backends
 Restart=no
 
 [Unit]
-PartOf=graphical-session.target
-After=graphical-session.target
+PartOf=graphical-session-fake.target
+After=graphical-session-fake.target
 Description=Picom: X11 compositor
 Documentation=man:picom(1)

@@ -1,5 +1,5 @@
 [Install]
-WantedBy=graphical-session.target
+WantedBy=graphical-session-fake.target
 
 [Service]
 ExecStart=/usr/bin/env blueman-applet
@@ -7,7 +7,7 @@ Restart=always
 RestartSec=5
 
 [Unit]
-PartOf=graphical-session.target
-After=graphical-session.target
+PartOf=graphical-session-fake.target
+After=graphical-session-fake.target
 Description=Blueman-Applet: A tray applet for managing bluetooth
 Documentation=man:blueman-applet(1)

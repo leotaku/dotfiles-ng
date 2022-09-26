@@ -3,7 +3,7 @@ Type=oneshot
 ExecStart=/usr/bin/env xkbcomp ./.config/custom.xkb $DISPLAY
 
 [Unit]
-After=graphical-session.target
+After=graphical-session-fake.target
 Description=Reload keyboard layout
 Documentation=man:xkbcomp(1) man:systemd.device(5)
 DefaultDependencies=false

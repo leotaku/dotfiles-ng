@@ -1,12 +1,12 @@
 [Install]
-WantedBy=graphical-session.target
+WantedBy=graphical-session-fake.target
 
 [Service]
 ExecStart=/usr/bin/env srandrd -v -n autorandr -c
 Restart=no
 
 [Unit]
-PartOf=graphical-session.target
-After=graphical-session.target
+PartOf=graphical-session-fake.target
+After=graphical-session-fake.target
 Description=Srandrd and Autorandr: Multiple monitor handling
 Documentation=man:srandrd(1) man:autorandr(1)
