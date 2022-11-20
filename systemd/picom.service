@@ -2,7 +2,7 @@
 WantedBy=graphical-session-fake.target
 
 [Service]
-ExecStart=/usr/bin/env picom --experimental-backends
+ExecStart=/usr/bin/env picom
 Restart=no
 
 [Unit]
