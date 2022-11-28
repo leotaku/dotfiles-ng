@@ -148,10 +148,7 @@ gears.timer {
 }
 
 local function create(s)
-   local mypromptbox = awful.widget.prompt {
-      prompt = 'Execute: '
-   }
-   local mytaglist = awful.widget.taglist {
+   local taglist = awful.widget.taglist {
       screen = s,
       filter  = awful.widget.taglist.filter.all,
       layout   = {
@@ -160,7 +157,7 @@ local function create(s)
       },
    }
 
-   local mytextclock = awful.widget.watch("date '+%H:%M'", 1)
+   local textclock = awful.widget.watch("date '+%H:%M'", 1)
 
    local cal_popup = awful.popup {
       ontop = true,
@@ -177,7 +174,7 @@ local function create(s)
       }
    )
 
-   mytextclock:connect_signal(
+   textclock:connect_signal(
       "mouse::enter",
       function ()
          awful.placement.top_right(
@@ -191,7 +188,7 @@ local function create(s)
       end
    )
 
-   mytextclock:connect_signal(
+   textclock:connect_signal(
       "mouse::leave",
       function ()
          cal_popup.visible = false
@@ -213,13 +210,9 @@ local function create(s)
             -- Start section
             {
                {
-                  mytaglist,
+                  taglist,
                   left = dpi(5),
                   layout = wibox.container.margin,
-               },
-               {
-                  mypromptbox,
-                  layout = wibox.layout.fixed.horizontal,
                },
                layout = wibox.layout.stack,
             },
@@ -249,7 +242,7 @@ local function create(s)
                   bottom = dpi(3),
                   layout = wibox.container.margin
                },
-               mytextclock,
+               textclock,
                spacing = dpi(10),
                spacing_widget = {
                   markup = "|",
