@@ -1,3 +1,4 @@
+export PATH="$PATH:$HOME/bin"
 export HISTFILE="$HOME/.local/share/zsh_history"
 export DUMPFILE="$HOME/.local/share/zsh_zcompdump"
 export HISTSIZE=100000
