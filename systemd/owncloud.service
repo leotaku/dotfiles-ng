@@ -1,0 +1,12 @@
+[Install]
+WantedBy=graphical-session-fake.target
+
+[Service]
+ExecStart=/usr/bin/env owncloud
+Restart=no
+
+[Unit]
+PartOf=graphical-session-fake.target
+After=graphical-session-fake.target gnome-keyring-daemon.service
+Description=Owncloud: The desktop app for efficient syncing
+Documentation=https://owncloud.com/de/

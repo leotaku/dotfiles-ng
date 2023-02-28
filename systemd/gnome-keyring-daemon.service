@@ -1,0 +1,11 @@
+[Install]
+WantedBy=graphical-session-fake.target
+
+[Service]
+ExecStart=/usr/bin/env gnome-keyring-daemon -f
+Restart=no
+
+[Unit]
+Before=graphical-session-fake.target
+Description=Gnome-Keyring-Daemon: The Gnome keyring daemon
+Documentation=man:gnome-keyring(1) man:gnome-keyring-daemon(1)
