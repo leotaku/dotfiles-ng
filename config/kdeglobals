@@ -1,2 +1,4 @@
 [General]
-BrowserApplication=firefox.desktop
+# This is not the proper desktop entry I would like to be using, but
+# the local user firefox.desktop entry is not recognized somehow.
+BrowserApplication=firefox-devedition.desktop
