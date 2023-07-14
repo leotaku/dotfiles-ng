@@ -19,10 +19,11 @@ ruled.client.append_rules {
    {
       rule_any = {
          class = {
-            "firefox", "Firefox",
+            "firefox-aurora", "firefox", "Firefox",
             "blender", "Blender",
             "chromium-browser", "Chromium-browser",
             "inkscape", "Inkscape",
+            "libreoffice",
          },
       },
       properties = { maximized = false, floating = false },
