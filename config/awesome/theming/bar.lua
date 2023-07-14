@@ -234,6 +234,8 @@ local function create(s)
             },
             -- End section
             {
+               awful.widget.watch("/home/leo/repos/dotfiles-ng/scripts/services.sh s", 10),
+               awful.widget.watch("/home/leo/repos/dotfiles-ng/scripts/services.sh u --user", 10),
                {
                   {
                      widget = wibox.widget.systray
