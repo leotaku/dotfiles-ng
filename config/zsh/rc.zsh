@@ -98,7 +98,7 @@ plug() {
     else
         if [[ ! -d "$zcache/$name" ]]; then
             mkdir -p "$zcache"
-            git clone git@github.com:zsh-users/"$name".git "$zcache/$name"
+            git clone https://github.com/zsh-users/"$name".git "$zcache/$name"
         fi
         source "$zcache/$name/$name.plugin.zsh"
     fi
