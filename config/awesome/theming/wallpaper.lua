@@ -11,13 +11,13 @@ local awful = require("awful")
 local gears = require("gears")
 
 -- Code
-local function find_wallpaper(relative)
-   for _, parent in ipairs({
-         os.getenv("HOME") .. "/.config/awesome",
-         os.getenv("HOME") .. "/.config",
-         os.getenv("HOME"),
+local function find_wallpaper(filename)
+   for _, path in ipairs({
+         os.getenv("HOME") .. "/.config/awesome" .. "/" .. filename,
+         os.getenv("HOME") .. "/.config" .. "/" .. filename,
+         os.getenv("HOME") .. "/" .. filename,
+         filename,
    }) do
-      local path = parent .. "/" .. relative
       local f = io.open(path, "r")
       if f then
          io.close(f)
