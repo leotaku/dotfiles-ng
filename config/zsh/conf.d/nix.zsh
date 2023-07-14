@@ -1,3 +1,5 @@
+autoload -Uz add-zsh-hook
+
 function _nix() {
     local ifs_bk="$IFS"
     local input=("${(Q)words[@]}")
