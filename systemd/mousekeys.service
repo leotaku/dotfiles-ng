@@ -1,0 +1,10 @@
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/env xkbset mousekeys
+ExecStart=/usr/bin/env xkbset exp "=mousekeys"
+
+[Unit]
+After=graphical-session-fake.target
+Description=Allow mouse keys to be triggered from keyboard
+Documentation=man:xkbset(1)
+DefaultDependencies=false
