@@ -1,0 +1,49 @@
+# Mappings
+
+map \# set recolor
+set recolor                     "false"
+set selection-clipboard         "clipboard"
+
+# Adapted zathurarc-dark
+
+set font                        "Fira Mono 9"
+set default-bg                  "#151718" #00
+set default-fg                  "#202020" #01
+
+set statusbar-bg                "#151718" #01
+set statusbar-fg                "#E0E0E0" #04
+
+set index-bg                    "#151718" #00
+set index-fg                    "#E0E0E0" #04
+
+set index-active-bg             "#E0E0E0" #04
+set index-active-fg             "#151718" #00
+
+set inputbar-bg                 "#151718" #00 currently not used
+set inputbar-fg                 "#6A9FB5" # "#303030" #02
+
+set notification-error-bg       "#AC4142" #08
+set notification-error-fg       "#151718" #00
+
+set notification-warning-bg     "#AC4142" #08
+set notification-warning-fg     "#151718" #00
+
+set highlight-color             "#F4BF75" #0A
+set highlight-active-color      "#90A959" #0B
+
+set completion-highlight-fg     "#151718" #00
+set completion-highlight-bg     "#75B5AA" #0C
+
+set completion-bg               "#151718" #00
+set completion-fg               "#75B5AA" #0C
+
+set notification-bg             "#6A9FB5" #0D
+set notification-fg             "#151718" #00
+
+set recolor-lightcolor          "#151718" #00
+set recolor-darkcolor           "#E0E0E0" #06
+
+# setting recolor-keep true will keep any color your pdf has.
+# if it is false, it'll just be black and white
+set recolor-keephue             "true"
+
