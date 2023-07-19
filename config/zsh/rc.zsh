@@ -108,6 +108,7 @@ plug nix.zsh
 plug vi.zsh
 plug direnv.zsh
 plug zoxide.zsh
+plug micromamba.zsh
 
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
