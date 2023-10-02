@@ -1,0 +1,4 @@
+! option                =       symbols
+  custom:leo            =       +custom(leo)
+
+! include %S/evdev
