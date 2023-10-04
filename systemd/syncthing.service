@@ -1,5 +1,5 @@
 [Install]
-WantedBy=default-fake.target
+WantedBy=default.target
 
 [Service]
 ExecStart=/usr/bin/env syncthing -no-browser -no-restart -logflags=0

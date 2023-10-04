@@ -1,12 +1,12 @@
 [Install]
-WantedBy=graphical-session-fake.target
+WantedBy=graphical-session.target
 
 [Service]
 ExecStart=/usr/bin/env mullvad-gui
 Restart=no
 
 [Unit]
-PartOf=graphical-session-fake.target
-After=graphical-session-fake.target
+PartOf=graphical-session.target
+After=graphical-session.target
 Description=Mullvad: VPN client
 Documentation=https://mullvad.net/en/

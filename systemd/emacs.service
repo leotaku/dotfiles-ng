@@ -1,5 +1,5 @@
 [Install]
-WantedBy=default-fake.target
+WantedBy=graphical-session.target
 
 [Service]
 ExecStart=/usr/bin/env emacs --fg-daemon
