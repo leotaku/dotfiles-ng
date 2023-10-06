@@ -20,6 +20,10 @@ if type direnv&>/dev/null; then
             DIRENV_DIR=""
         fi
     }
+    _direnv_color_hook() {
+        psvar[1]="$DIRENV_DIR"
+    }
+    add-zsh-hook precmd _direnv_color_hook
 
     typeset -ag precmd_functions;
     if [[ -z "${precmd_functions[(r)_direnv_hook]+1}" ]]; then
