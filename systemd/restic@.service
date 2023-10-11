@@ -1,0 +1,11 @@
+[Service]
+Type=oneshot
+EnvironmentFile=%h/.local/share/secrets/restic-%i.env
+ExecStart=/usr/bin/env restic backup . --exclude-caches
+Restart=no
+CPUWeight=50
+CPUQuota=25%
+
+[Unit]
+Description=Restic: encrypted deduplicating backup tool
+Documentation=man:restic(1)
