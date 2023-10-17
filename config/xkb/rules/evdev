@@ -1,4 +1,5 @@
-! option                =       symbols
-  custom:leo            =       +custom(leo)
+! option                   =       symbols
+  custom:homerow_arrowkeys =       +custom(homerow_arrowkeys)
+  custom:altgr_umlauts     =       +custom(altgr_umlauts)
 
 ! include %S/evdev

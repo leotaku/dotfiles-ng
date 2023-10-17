@@ -1,12 +1,13 @@
 partial alphanumeric_keys
-xkb_symbols "leo" {
-    include "pc+de(nodeadkeys)+inet(evdev)+terminate(ctrl_alt_bksp)"
-
+xkb_symbols "homerow_arrowkeys" {
     key <AC07>  { [ j,           J,            Down,       dead_horn  ] };
     key <AC08>  { [ k,           K,            Up,         ampersand  ] };
     key <AC09>  { [ l,           L,            Right,      Lstroke    ] };
     key <AC10>  { [ odiaresis,   Odiaresis,    Left,       NoSymbol   ] };
+};
 
+partial alphanumeric_keys
+xkb_symbols "altgr_umlauts" {
     key <AC02>  { [ s,           S,            ssharp,     Ssharp     ] };
     key <AD07>  { [ u,           U,            udiaeresis, Udiaeresis ] };
     key <AC01>  { [ a,           A,            adiaeresis, Adiaeresis ] };
