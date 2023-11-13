@@ -33,4 +33,6 @@ if type direnv&>/dev/null; then
     if [[ -z "${chpwd_functions[(r)_direnv_hook]+1}" ]]; then
         chpwd_functions=( _direnv_generic_hook ${chpwd_functions[@]} )
     fi
+
+    _direnv_generic_hook
 fi
