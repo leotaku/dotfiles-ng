@@ -1,8 +1,5 @@
 [Service]
 ExecStart=/usr/bin/env lorri daemon
-PrivateTmp=true
-ProtectSystem=strict
-ProtectHome=read-only
 Restart=on-failure
 
 [Unit]
