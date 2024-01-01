@@ -9,4 +9,4 @@ and more
 
 ## License
 
-[MIT](./LICENSE) © 2019-2022 Leo Gaskin
+[MIT](./LICENSE) © 2019-2024 Leo Gaskin
