@@ -105,6 +105,7 @@ plug() {
 }
 
 plug nix.zsh
+plug fastprompt.zsh
 plug vi.zsh
 plug direnv.zsh
 plug zoxide.zsh

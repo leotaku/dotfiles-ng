@@ -5,7 +5,7 @@ bindkey -v '^M' vi-accept-line
 bindkey -a '^[' vi-insert
 
 function _vi_reset_cursor() {
-    printf %b "\e[6 q"
+    printf %b "\e[?25h\e[6 q"
 }
 zle -N zle-line-init _vi_reset_cursor
 
