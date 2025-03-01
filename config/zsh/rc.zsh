@@ -3,7 +3,7 @@ export HISTFILE="$HOME/.local/share/zsh_history"
 export DUMPFILE="$HOME/.local/share/zsh_zcompdump"
 export HISTSIZE=100000
 export SAVEHIST=100000
-setopt incappendhistory appendhistory histignorealldups histignorespace
+setopt incappendhistory histignorealldups histignorespace
 
 setopt interactivecomments
 setopt autocd autopushd pushdignoredups pushdminus pushdsilent
