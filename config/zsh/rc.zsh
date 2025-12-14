@@ -81,7 +81,6 @@ zstyle ':completion::complete:*' cache-path "$HOME/.cache/zcompcache"
 autoload -Uz compinit
 autoload -Uz bashcompinit && bashcompinit
 compinit -d "$DUMPFILE"
-complete -o nospace -C "/usr/bin/env terraform" terraform
 
 # Aliases
 alias ls='LC_COLLATE=C ls --color=tty --group-directories-first'
