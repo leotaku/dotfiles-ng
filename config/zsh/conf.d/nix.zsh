@@ -1,22 +1,28 @@
 autoload -Uz add-zsh-hook
 
 function _nix() {
-    local ifs_bk="$IFS"
     local input=("${(Q)words[@]}")
-    IFS=$'\n'
-    local res=($(NIX_GET_COMPLETIONS=$((CURRENT - 1)) "$input[@]"))
+    local -a suggestions # what value to actually use on completion
+    local -a suggestions_display # what to display to the user
+    local tpe suggestion description
+    local ifs_bk="$IFS"
+    IFS=$'\t'
+    NIX_GET_COMPLETIONS=$((CURRENT - 1)) "$input[@]" 2>/dev/null | {read tpe; while IFS=$'\t' read -r suggestion description; do
+      suggestions+=("$suggestion")
+      if [ -n "$description" ]; then
+        suggestions_display+=("$suggestion -- $description")
+      else
+        suggestions_display+=("$suggestion")
+      fi
+    done}
     IFS="$ifs_bk"
-    local tpe="${${res[1]}%%>	*}"
-    local -a suggestions
-    declare -a suggestions
-    for suggestion in ${res:1}; do
-        suggestions+="${suggestion/	/:}"
-    done
+    local -a args
     if [[ "$tpe" == filenames ]]; then
-        compadd -f
+      args+=('-f')
+    elif [[ "$tpe" == attrs ]]; then
+      args+=('-S' '')
     fi
-
-    _describe 'nix' suggestions
+    compadd -J nix "${args[@]}" -d suggestions_display -a suggestions
 }
 
 compdef _nix nix
