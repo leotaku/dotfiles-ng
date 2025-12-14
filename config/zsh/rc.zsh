@@ -78,10 +78,6 @@ zstyle ':completion:*' menu select
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path "$HOME/.cache/zcompcache"
 
-autoload -Uz compinit
-autoload -Uz bashcompinit && bashcompinit
-compinit -d "$DUMPFILE"
-
 # Aliases
 alias ls='LC_COLLATE=C ls --color=tty --group-directories-first'
 alias diff='diff --color=auto'
@@ -104,6 +100,11 @@ plug() {
 }
 
 plug nix.zsh
+
+autoload -Uz compinit
+autoload -Uz bashcompinit && bashcompinit
+compinit -d "$DUMPFILE"
+
 plug fastprompt.zsh
 plug vi.zsh
 plug direnv.zsh
