@@ -1,4 +1,6 @@
 if type direnv&>/dev/null; then
+    autoload -Uz add-zsh-hook
+
     direnv() {
         export DIRENV_DIR="-"
         command direnv "$@"
