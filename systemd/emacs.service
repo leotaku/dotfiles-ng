@@ -7,7 +7,8 @@ ExecStop=/usr/bin/env emacsclient --eval '(kill-emacs)'
 Restart=on-failure
 
 [Unit]
-After=basic.target
+BindsTo=org.gnome.Shell@wayland.service
+After=org.gnome.Shell@wayland.service
 Description=Emacs: The extensible, self-documenting text editor
 Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
 X-RestartIfChanged=false
