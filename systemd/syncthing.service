@@ -2,7 +2,7 @@
 WantedBy=default.target
 
 [Service]
-ExecStart=/usr/bin/env syncthing -no-browser -no-restart -logflags=0
+ExecStart=/usr/bin/env syncthing serve --no-browser --no-restart --logflags=0
 Restart=on-failure
 RestartForceExitStatus=3 4
 SuccessExitStatus=3 4
