@@ -25,3 +25,10 @@ defaultBranch = master
 	clean = git-lfs clean -- %f
 	required = true
 	smudge = git-lfs smudge -- %f
+
+[diff "jupytext"]
+	textconv = uvx jupytext --to py:percent --output -
+
+[filter "nbstripout"]
+	clean = uvx nbstripout
+	smudge = cat
