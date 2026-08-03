@@ -19,3 +19,9 @@ askpass =
 
 [init]
 defaultBranch = master
+
+[filter "lfs"]
+	process = git-lfs filter-process
+	clean = git-lfs clean -- %f
+	required = true
+	smudge = git-lfs smudge -- %f
